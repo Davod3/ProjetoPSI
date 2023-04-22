@@ -11,9 +11,6 @@ import { ItemService } from '../item.service';
 export class ItemsComponent {
   items : Item[] = [];
   selectedItem?: Item;
-  onSelect(item: Item): void {
-    this.selectedItem = item;
-  }
 
   constructor(private itemService: ItemService) {}
 

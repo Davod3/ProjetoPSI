@@ -7,6 +7,10 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ItemService {
+  getItem(id: number) : Observable<Item> {
+    const item = ITEMS.find(i => i.id === id)!;
+    return of(item);
+  }
 
   constructor() { }
 
