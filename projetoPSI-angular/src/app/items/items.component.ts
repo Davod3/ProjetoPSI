@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Item } from '../item';
-import { ITEMS } from '../mock-items';
+import { ItemService } from '../item.service';
 
 @Component({
   selector: 'app-items',
@@ -9,9 +9,20 @@ import { ITEMS } from '../mock-items';
 })
 
 export class ItemsComponent {
-  items = ITEMS;
+  items : Item[] = [];
   selectedItem?: Item;
   onSelect(item: Item): void {
     this.selectedItem = item;
+  }
+
+  constructor(private itemService: ItemService) {}
+
+  getItems(): void {
+    this.itemService.getItems()
+        .subscribe(items => this.items = items);
+  }
+
+  ngOnInit(): void {
+    this.getItems();
   }
 }
