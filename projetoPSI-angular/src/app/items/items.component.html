@@ -1,0 +1,12 @@
+
+<h2> Items 
+    <ul class = "items">
+        <li *ngFor="let item of items">
+            <button type="button" (click)="onSelect(item)">
+                <span class="name">{{item.name}}</span>
+            </button>
+        </li>
+    </ul>
+</h2>
+
+<app-item-detail [item]="selectedItem"></app-item-detail>
