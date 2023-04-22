@@ -7,7 +7,11 @@ var UserSchema = new mongoose.Schema({
     password: {type: String, required: true}
 });
 
-UserSchema.methods.genJwt() = function() {
+UserSchema.methods.validatePwd = function(password) {
+    return this.password===password;
+};
+
+UserSchema.methods.genJwt = function() {
 
     let expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 7);
@@ -20,6 +24,8 @@ UserSchema.methods.genJwt() = function() {
     }, 'CASADOSSEGREDOS');
 
 };
+
+
 
 // Export model
 module.exports = mongoose.model("User", UserSchema);
