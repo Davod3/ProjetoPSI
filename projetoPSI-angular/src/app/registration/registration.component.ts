@@ -55,21 +55,29 @@ export class RegistrationComponent {
     if(this.credentials.isValid){
 
       this.authenticator.register(this.credentials).subscribe((response) => {
-       
-        if(response.err){
+      
+        if(response){
+
+          if(response.err){
           
-          this.credentials.isValid = false;
-          
-          response.err.forEach(error => {
-            this.credentials.err.push(error);
-          });
+            this.credentials.isValid = false;
+            
+            response.err.forEach(error => {
+              this.credentials.err.push(error);
+            });
+  
+          } else {
+  
+            console.log("User registered!");
+  
+            //Redirect to dashboard
+            this.router.navigateByUrl('/dashboard');
+  
+          }
 
         } else {
 
-          console.log("User registered!");
-
-          //Redirect to dashboard
-          this.router.navigateByUrl('/dashboard');
+          alert("Ocorreu um erro na comunicação http!");
 
         }
 

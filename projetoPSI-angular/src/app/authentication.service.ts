@@ -3,7 +3,7 @@ import { User } from './user';
 import { UserToken } from './token';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {ResponseToken} from './responseToken';
 
@@ -13,7 +13,7 @@ import {ResponseToken} from './responseToken';
 export class AuthenticationService {
 
   private token: string;
-  private url: string = 'http://localhost:3000';
+  private url: string = 'http://localhost:3057';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -72,6 +72,14 @@ export class AuthenticationService {
 
       return response;
 
-    }));
+    }), catchError(this.handleError<ResponseToken>(null)));
+  }
+
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      
+      //Return observable with default result
+      return of(result as T);
+    };
   }
 }
