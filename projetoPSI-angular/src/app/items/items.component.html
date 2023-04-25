@@ -1,0 +1,12 @@
+
+<h2>  
+    <ul class = "items">
+        <li *ngFor="let item of items">
+            <a routerLink="/detail/{{item.id}}">
+                <span class="name">{{item.name}}</span>
+              </a>
+        </li>
+    </ul>
+</h2>
+
+<app-item-detail [item]="selectedItem"></app-item-detail>
