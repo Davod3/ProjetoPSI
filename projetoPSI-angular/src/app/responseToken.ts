@@ -1,3 +1,4 @@
 export interface ResponseToken {
-    token: string
+    token: string;
+    err: string[];
 }
