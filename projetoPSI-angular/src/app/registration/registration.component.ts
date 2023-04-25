@@ -69,6 +69,7 @@ export class RegistrationComponent {
           console.log("User registered!");
 
           //Redirect to dashboard
+          this.router.navigateByUrl('/dashboard');
 
         }
 
