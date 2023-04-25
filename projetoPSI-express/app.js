@@ -3,11 +3,27 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport = require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var cors = require('cors')
 var app = express();
+app.use(cors())
+
+app.listen('3057');
+
+const mongoose = require("mongoose");
+mongoose.set('strictQuery', false);
+const mongoDB = "mongodb+srv://psi007:steamdawish@cluster0.aa5jydx.mongodb.net/psi007?retryWrites=true&w=majority";
+
+main().catch(err => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
+require('./auth_config/passport');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +34,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
