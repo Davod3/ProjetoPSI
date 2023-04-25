@@ -12,6 +12,8 @@ var cors = require('cors')
 var app = express();
 app.use(cors())
 
+app.listen('3057');
+
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 const mongoDB = "mongodb+srv://psi007:steamdawish@cluster0.aa5jydx.mongodb.net/psi007?retryWrites=true&w=majority";

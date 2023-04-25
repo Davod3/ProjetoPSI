@@ -29,8 +29,8 @@ export class RegistrationComponent {
 
     this.credentials.err = [];
     this.credentials.isValid = true;
-    const validPassword = new RegExp('^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$');
-    const validUsername = new RegExp('^[a-zA-Z0-9]+$');
+    const validPassword = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/);
+    const validUsername = new RegExp(/^[a-zA-Z0-9]+$/);
 
     if(this.credentials.username.length < 3) {
         this.credentials.isValid = false;
@@ -41,6 +41,9 @@ export class RegistrationComponent {
         this.credentials.isValid = false;
         this.credentials.err.push("Password must have more than 8 characters!");
     }
+
+    console.log(this.credentials.password);
+    console.log(validPassword.test(this.credentials.password));
 
     if(!validPassword.test(this.credentials.password)) {
         this.credentials.isValid = false;
@@ -55,21 +58,29 @@ export class RegistrationComponent {
     if(this.credentials.isValid){
 
       this.authenticator.register(this.credentials).subscribe((response) => {
-       
-        if(response.err){
+      
+        if(response){
+
+          if(response.err){
           
-          this.credentials.isValid = false;
-          
-          response.err.forEach(error => {
-            this.credentials.err.push(error);
-          });
+            this.credentials.isValid = false;
+            
+            response.err.forEach(error => {
+              this.credentials.err.push(error);
+            });
+  
+          } else {
+  
+            console.log("User registered!");
+  
+            //Redirect to dashboard
+            this.router.navigateByUrl('/dashboard');
+  
+          }
 
         } else {
 
-          console.log("User registered!");
-
-          //Redirect to dashboard
-          this.router.navigateByUrl('/dashboard');
+          alert("Ocorreu um erro na comunicação http!");
 
         }
 
