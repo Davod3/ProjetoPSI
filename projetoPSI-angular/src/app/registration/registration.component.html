@@ -10,8 +10,12 @@
       <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
     </div>
 
-    <div class="form-errors">
-      <p *ngIf="credentials.err">{{credentials.err}}</p>
+    <div class="form-errors" *ngIf="credentials.err">
+      <ul class="form-error-list">
+
+        <li *ngFor="let error of credentials.err">{{error}}</li>
+
+      </ul>
     </div>
 
 
