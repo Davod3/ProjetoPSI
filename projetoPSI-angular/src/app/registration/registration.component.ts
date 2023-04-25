@@ -29,8 +29,8 @@ export class RegistrationComponent {
 
     this.credentials.err = [];
     this.credentials.isValid = true;
-    const validPassword = new RegExp('^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$');
-    const validUsername = new RegExp('^[a-zA-Z0-9]+$');
+    const validPassword = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/);
+    const validUsername = new RegExp(/^[a-zA-Z0-9]+$/);
 
     if(this.credentials.username.length < 3) {
         this.credentials.isValid = false;
@@ -41,6 +41,9 @@ export class RegistrationComponent {
         this.credentials.isValid = false;
         this.credentials.err.push("Password must have more than 8 characters!");
     }
+
+    console.log(this.credentials.password);
+    console.log(validPassword.test(this.credentials.password));
 
     if(!validPassword.test(this.credentials.password)) {
         this.credentials.isValid = false;

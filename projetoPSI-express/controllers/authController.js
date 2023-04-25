@@ -4,8 +4,8 @@ const User = require('../models/user');
 
 exports.register = function(req, res, next) {
 
-    const validPassword = new RegExp('^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$');
-    const validUsername = new RegExp('^[a-zA-Z0-9]+$');
+    const validPassword = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/);
+    const validUsername = new RegExp(/^[a-zA-Z0-9]+$/);
     var user = new User();
 
     user.username = req.body.username;
