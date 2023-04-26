@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: '', component: AppComponent},
   { path: 'items', component: ItemsComponent },
-  { path: 'detail/:id', component: ItemDetailComponent },
+  { path: 'item/:id', component: ItemDetailComponent },
 ];
 
 @NgModule({

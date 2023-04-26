@@ -11,7 +11,8 @@ import { ItemService } from '../item.service';
   styleUrls: ['./item-detail.component.css']
 })
 export class ItemDetailComponent {
-  @Input() item?: Item;
+
+  item : Item;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,9 +25,14 @@ export class ItemDetailComponent {
   }
 
   getItem(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    console.log("ID " + id);
     this.itemService.getItem(id)
-      .subscribe(item => this.item = item);
+      .subscribe(item => {
+        this.item = item
+        console.log("item");
+      });
+    
   }
 
   goBack(): void {
