@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Item } from './item';
-import { ITEMS } from './mock-items';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -10,9 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class ItemService {
 
-  private itemsUrl = 'api/items';  // URL to web api
-
-
+  private itemsUrl = 'http://localhost:3057';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,16 +17,17 @@ export class ItemService {
   
   constructor(private http: HttpClient) { }
 
-  /** GET hero by id. Will 404 if id not found */
   getItem(id: number): Observable<Item> {
-    const url = `${this.itemsUrl}/${id}`;
+    console.log("HERE1");
+    const url = `${this.itemsUrl}/item/${id}`;
     return this.http.get<Item>(url).pipe(
       catchError(this.handleError<Item>(`getItem id=${id}`))
     );
   }
   
   getItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.itemsUrl)
+    console.log("HERE2");
+    return this.http.get<Item[]>(`${this.itemsUrl}/items`)
     .pipe(
       catchError(this.handleError<Item[]>('getItems', []))
     );
