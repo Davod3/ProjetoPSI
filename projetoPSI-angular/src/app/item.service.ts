@@ -17,11 +17,16 @@ export class ItemService {
   
   constructor(private http: HttpClient) { }
 
-  getItem(id: number): Observable<Item> {
+  getItem(_id: String): Observable<Item> {
     console.log("HERE1");
-    const url = `${this.itemsUrl}/item/${id}`;
+    const url = `${this.itemsUrl}/item/${_id}`;
+    console.log(url);
     return this.http.get<Item>(url).pipe(
-      catchError(this.handleError<Item>(`getItem id=${id}`))
+      tap((response: Item) => {
+        console.log(response);
+        return response;
+      })
+      ,catchError(this.handleError<Item>(null))
     );
   }
   

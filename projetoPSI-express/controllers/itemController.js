@@ -17,7 +17,7 @@ exports.item_list = (req, res) => {
   };
 
   exports.item_detail = (req, res, next) =>{
-    Item.find({_id: req.params.id})
+    Item.findById(req.params.id)
     .then(function(item){
       res.json(item);
     })
