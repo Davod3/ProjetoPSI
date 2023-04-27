@@ -1,12 +1,48 @@
-<div *ngIf="item">
-    <h2>{{item.name}} Details</h2>
-    <div>type: {{item.type}}</div>
-    <div>description: {{item.description}}</div>
-    <div>platforms: {{item.platforms}}</div>
-    <div>languages: {{item.languages}}</div>
-    <div>price: {{item.price}}</div>
-    <div>rating: {{item.rating}}</div>
-    <div>reviews: {{item.reviews}}</div>
+<div class="item-details" *ngIf="item">
+  <div class="item-header">
+    <h2>{{item.name}}</h2>
+    <div class="item-type">{{item.type}}</div>
   </div>
+  <div class="item-content">
+    <div class="main-box">
+      <div class="main-info">
+        <div class="item-description">{{item.description}}</div>
+        <div class="item-reviews">
+          <b>Reviews:</b>
+          <ul>
+            <li *ngFor="let review of item.reviews">{{review}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="item-image">
+        <img [src]="item.image" alt="{{item.name}} Image">
+      </div>
+    </div>
 
-  <button type="button" (click)="goBack()">go back</button>
+    <div class="item-info">
+      <div class="info-left">
+        <div class="item-rating">
+          {{item.rating}}/5
+        </div>
+        <div class="item-languages">
+          <b>Available in:</b>
+          <ul>
+            <li *ngFor="let language of item.languages">{{language}}</li>
+          </ul>
+        </div>
+        <div class="item-platforms">
+          <b>Available on:</b>
+          <ul>
+            <li class="platform-li" *ngFor="let platform of item.platforms">{{platform}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-right">
+        <div class="item-price">
+          {{item.price}}€
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" (click)="goBack()">Go back</button>
+</div>
