@@ -2,6 +2,8 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const User = require('../models/user');
 
+const DEFAULT_PROFILE_PIC = "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
+
 exports.register = function(req, res, next) {
 
     const validPassword = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/);
@@ -10,6 +12,7 @@ exports.register = function(req, res, next) {
 
     user.username = req.body.username;
     user.password = req.body.password;
+    user.image = DEFAULT_PROFILE_PIC;   
 
     var errorMessages = [];
     var isValid = true;

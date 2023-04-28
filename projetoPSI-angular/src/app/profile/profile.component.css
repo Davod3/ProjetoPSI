@@ -1,0 +1,96 @@
+.content {
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.user-info{
+    grid-area: 1 / 1 / 5 / 2; 
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+img{
+    width: 10rem;
+}
+
+.username{
+    font-size: 3em;
+    text-align: center;
+}
+
+.user-links{
+    grid-area: 1 / 2 / 5 / 6; 
+    display: flex;
+    flex-direction: column;
+    flex:5;
+    gap:10%;
+    align-items: center;
+    justify-content: center;
+}
+
+a:link { 
+    text-decoration: none; 
+    color: inherit;
+}
+
+.user-links > *{
+    font-size: 3rem;
+    background-color: #a6a6a6;
+    border-radius: 10px;
+    width: 90%;
+    text-align: center;
+}
+
+.back{
+    grid-area: 5 / 1 / 6 / 2;
+    align-items: center;
+    justify-content: center;
+}
+
+.back button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    margin-left: 25%;
+  }
+  
+  .back button:hover {
+    background-color: #3e8e41;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap:10%;
+        height: 120%;
+    }
+
+    .user-links > div{
+        font-size: 2rem;
+    }
+    .user-links{
+        gap:10px;
+    }
+    .link{
+        height:6%;
+    }
+  }
