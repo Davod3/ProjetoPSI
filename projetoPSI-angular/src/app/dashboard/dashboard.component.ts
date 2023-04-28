@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { Item } from '../item';
-import { ItemService } from '../item.service';
-import { ItemsComponent } from '../items/items.component';
-import { BibliotecaComponent } from '../biblioteca/biblioteca.component';
 import { Router } from '@angular/router';
 import { User } from '../user';
 import { AuthenticationService } from '../authentication.service';
@@ -32,12 +28,10 @@ export class DashboardComponent {
     this.router.navigate(["/following"]);
   }
 
-  perfil(): void {
-    //Nothing yet
-  }
-
-  getUser(): User {
-    const user = this.authService.getUser();
-    return user;
+  profile(): void {
+    const user = this.authService.getUser();;
+    const id = user._id;
+    console.log(id);
+    this.router.navigate([`/profile/${id}`]);
   }
 }
