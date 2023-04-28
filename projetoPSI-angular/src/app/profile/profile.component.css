@@ -37,7 +37,12 @@ img{
     justify-content: center;
 }
 
-.user-links > div{
+a:link { 
+    text-decoration: none; 
+    color: inherit;
+}
+
+.user-links > *{
     font-size: 3rem;
     background-color: #a6a6a6;
     border-radius: 10px;
