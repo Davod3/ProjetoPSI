@@ -25,6 +25,8 @@ img{
 .username{
     font-size: 3em;
     text-align: center;
+    font-weight: bold;
+    max-width: 100%;
 }
 
 .user-links{
@@ -84,7 +86,11 @@ a:link {
         height: 120%;
     }
 
-    .user-links > div{
+    .username{
+        font-size: 2rem;
+    }
+
+    .user-links > *{
         font-size: 2rem;
     }
     .user-links{
