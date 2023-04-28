@@ -8,7 +8,8 @@ var ItemSchema = new mongoose.Schema({
   languages : { type: [String], required: true},
   price : {type: Number, required: true, min: 0},
   rating: {type: Number, required: true, min: 0},
-  reviews: { type: [String]}
+  reviews: { type: [String]},
+  image: {type: String, required: true}
 });
 
 // Export model

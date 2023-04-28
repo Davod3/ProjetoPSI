@@ -13,6 +13,7 @@ import { ListasComponent } from './listas/listas.component';
 import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 import { SeguidoresComponent } from './seguidores/seguidores.component';
 import { FollowingComponent } from './following/following.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FollowingComponent } from './following/following.component';
     BibliotecaComponent,
     SeguidoresComponent,
     FollowingComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

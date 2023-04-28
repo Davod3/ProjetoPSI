@@ -9,6 +9,7 @@ import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 import { ListasComponent } from './listas/listas.component';
 import { SeguidoresComponent } from './seguidores/seguidores.component';
 import { FollowingComponent } from './following/following.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'biblioteca', component: BibliotecaComponent},
   { path: 'listas', component: ListasComponent},
   { path: 'seguidores', component: SeguidoresComponent},
-  { path: 'following', component: FollowingComponent}
+  { path: 'following', component: FollowingComponent},
+  { path: 'profile/:id', component: ProfileComponent }
 ];
 
 @NgModule({
