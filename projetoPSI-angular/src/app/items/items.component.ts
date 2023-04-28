@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , Input} from '@angular/core';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
 
@@ -9,7 +9,7 @@ import { ItemService } from '../item.service';
 })
 
 export class ItemsComponent {
-  items : Item[] = [];
+  @Input() items : Item[] = [];
   selectedItem?: Item;
 
   constructor(private itemService: ItemService) {}
