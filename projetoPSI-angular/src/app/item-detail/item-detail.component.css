@@ -1,3 +1,10 @@
+html, body{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
 .item-details {
     padding: 20px;
     background-color: #f2f2f2;
@@ -33,7 +40,6 @@
     width: 100%;
     justify-content: center;
     gap:1%;
-    justify-content: space-between;
   }
 
   .info-left{
@@ -48,6 +54,7 @@
     justify-self: flex-end;
     display:flex;
     margin-right: 3%;
+    align-self: flex-end;
   }
 
   .item-price{
@@ -74,11 +81,11 @@
 
   .item-image{
     flex: 5;
-    display: flex;
-    justify-content: center;
     width: 50vw;
-    max-height: 50vh;
-    min-height: 50vh;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
   }
 
   .item-details h2 {
@@ -156,6 +163,51 @@
   
   .item-details button:hover {
     background-color: #3e8e41;
+  }
+
+  @media only screen and (max-width: 800px) {
+    .main-box{
+      flex-direction: column;
+    }
+
+    .item-image{
+      width: 100%;
+    }
+
+    html, body{
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .item-info{
+      flex-direction: column;
+    }
+
+    .info-left{
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .item-rating{
+      font-size: 3rem;
+    }
+    .item-info{
+      justify-content: center;
+      align-items: center;
+    }
+    .item-price{
+      font-size: 4rem;
+      justify-self: center;
+    }
+
+    .info-right{
+      align-items: center;
+      justify-self: center;
+      justify-content: center;
+    }
   }
 
   
