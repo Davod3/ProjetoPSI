@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   { path: 'items', component: ItemsComponent },
   { path: 'item/:id', component: ItemDetailComponent },
-  { path: 'biblioteca', component: BibliotecaComponent},
+  { path: 'biblioteca/:id', component: BibliotecaComponent},
   { path: 'listas', component: ListasComponent},
   { path: 'seguidores', component: SeguidoresComponent},
   { path: 'following', component: FollowingComponent},

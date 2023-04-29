@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit{
   }
 
   biblioteca(): void {
-    this.router.navigate(["/biblioteca"]);
+    this.router.navigate([`/biblioteca/${this.user._id}`]);
   }
 
   listas(): void {

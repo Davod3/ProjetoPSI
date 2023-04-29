@@ -21,7 +21,6 @@ export class UserService {
     const url = `${this.url}/profile/${_id}`;
     return this.http.get<User[]>(url).pipe(
       map(users => users[0]), // Return only the first element of the array
-      tap(user => console.log(user)),
       catchError(this.handleError<User>(null))
     );
   }

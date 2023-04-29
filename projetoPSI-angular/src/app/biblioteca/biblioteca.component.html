@@ -1,7 +1,21 @@
 <div class="biblioteca">
     <h1 class="biblioteca-title">Biblioteca de Itens</h1>
-    <div>
-        <app-item-detail *ngFor="let item of items" [item]="item"></app-item-detail>
-    </div>
+
+    <div *ngIf = "items.length > 0; then thenBlock else elseBlock "></div>
+
+    <ng-template #thenBlock>
+
+        <div>
+            <app-item-detail *ngFor="let item of items" [item]="item"></app-item-detail>
+        </div>
+
+    </ng-template>
+
+    <ng-template #elseBlock>
+
+        <h2> USER DOES NOT OWN ANY GAMES YET</h2>
+
+    </ng-template>
+
 </div>
 
