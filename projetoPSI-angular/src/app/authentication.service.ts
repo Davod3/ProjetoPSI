@@ -55,7 +55,7 @@ export class AuthenticationService {
     const user = this.getUser();
 
     if(user) {
-      return user.exp > Date.now() / 1000;
+      return user.expires > Date.now() / 1000;
     } else {
       return false;
     }

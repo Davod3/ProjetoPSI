@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user';
 import { AuthenticationService } from '../authentication.service';
@@ -8,9 +8,24 @@ import { AuthenticationService } from '../authentication.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
 
   constructor(private router: Router, private authService: AuthenticationService) {}
+
+  private user : User;
+
+  ngOnInit(): void {
+
+    if(this.authService.isLoggedIn()){
+
+      this.user = this.authService.getUser();
+
+    } else {
+
+      this.router.navigateByUrl('/registration');
+
+    }
+  }
 
   biblioteca(): void {
     this.router.navigate(["/biblioteca"]);
@@ -29,9 +44,7 @@ export class DashboardComponent {
   }
 
   profile(): void {
-    const user = this.authService.getUser();;
-    const id = user._id;
-    console.log(id);
+    let id = this.user._id;
     this.router.navigate([`/profile/${id}`]);
   }
 }

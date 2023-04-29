@@ -27,7 +27,6 @@ export class ProfileComponent {
     this.userService.getUser(id)
       .subscribe(user => {
         this.user = user
-        console.log(user);
       });
     
   }
