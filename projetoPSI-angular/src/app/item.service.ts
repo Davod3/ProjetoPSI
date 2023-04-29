@@ -44,7 +44,7 @@ export class ItemService {
     // if not search term, return empty item array.
     return of([]);
     }
-    return this.http.get<Item[]>(`${this.itemsUrl}/?name=${term}`).pipe(
+    return this.http.get<Item[]>(`${this.itemsUrl}/item/?name=${term}`).pipe(
     tap(x => x.length ?
         console.log(`found items matching "${term}"`) :
         console.log(`no items matching "${term}"`)),

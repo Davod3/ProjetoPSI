@@ -10,6 +10,7 @@ import { ListasComponent } from './listas/listas.component';
 import { SeguidoresComponent } from './seguidores/seguidores.component';
 import { FollowingComponent } from './following/following.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ItemSearchComponent } from './item-search/item-search.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'listas', component: ListasComponent},
   { path: 'seguidores', component: SeguidoresComponent},
   { path: 'following', component: FollowingComponent},
-  { path: 'profile/:id', component: ProfileComponent }
+  { path: 'profile/:id', component: ProfileComponent },
+  { path: 'search', component: ItemSearchComponent}
 ];
 
 @NgModule({
