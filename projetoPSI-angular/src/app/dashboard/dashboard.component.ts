@@ -32,19 +32,18 @@ export class DashboardComponent implements OnInit{
   }
 
   listas(): void {
-    this.router.navigate(["/listas"]);
+    this.router.navigate([`/listas/${this.user._id}`]);
   }
 
   seguidores(): void {
-    this.router.navigate(["/seguidores"]);
+    this.router.navigate([`/seguidores/${this.user._id}`]);
   }
 
   following(): void {
-    this.router.navigate(["/following"]);
+    this.router.navigate([`/following/${this.user._id}`]);
   }
 
   profile(): void {
-    let id = this.user._id;
-    this.router.navigate([`/profile/${id}`]);
+    this.router.navigate([`/profile/${this.user._id}`]);
   }
 }

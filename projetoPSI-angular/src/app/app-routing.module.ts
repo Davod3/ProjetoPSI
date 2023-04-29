@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'biblioteca/:id', component: BibliotecaComponent},
   { path: 'listas', component: ListasComponent},
   { path: 'seguidores', component: SeguidoresComponent},
-  { path: 'following', component: FollowingComponent},
+  { path: 'following/:id', component: FollowingComponent},
   { path: 'profile/:id', component: ProfileComponent }
 ];
 
