@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit{
   }
 
   seguidores(): void {
-    this.router.navigate([`/seguidores/${this.user._id}`]);
+    this.router.navigate([`/followers/${this.user._id}`]);
   }
 
   following(): void {

@@ -7,9 +7,9 @@ import { AppComponent } from './app.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 import { ListasComponent } from './listas/listas.component';
-import { SeguidoresComponent } from './seguidores/seguidores.component';
 import { FollowingComponent } from './following/following.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FollowersComponent } from './followers/followers.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'item/:id', component: ItemDetailComponent },
   { path: 'biblioteca/:id', component: BibliotecaComponent},
   { path: 'listas', component: ListasComponent},
-  { path: 'seguidores', component: SeguidoresComponent},
+  { path: 'followers/:id', component: FollowersComponent},
   { path: 'following/:id', component: FollowingComponent},
   { path: 'profile/:id', component: ProfileComponent }
 ];
