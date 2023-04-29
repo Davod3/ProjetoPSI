@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Item } from './item';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,19 +38,35 @@ export class ItemService {
     );
   }
 
-  /* GET items whose name contains search term */
+  getItemIDByName(name: string): Observable<string> {
+    return this.getItems().pipe(
+      map(items => {
+        const item = items.find(item => item.name === name);
+        return item ? item._id.toString() : '';
+      }),
+      catchError(this.handleError<string>('getItemByName'))
+    );
+  }
+
   searchItems(term: string): Observable<Item[]> {
     if (!term.trim()) {
-    // if not search term, return empty item array.
-    return of([]);
+      // if not search term, return empty item array.
+      return of([]);
     }
-    return this.http.get<Item[]>(`${this.itemsUrl}/item/?name=${term}`).pipe(
-    tap(x => x.length ?
-        console.log(`found items matching "${term}"`) :
-        console.log(`no items matching "${term}"`)),
-    catchError(this.handleError<Item[]>('searchItems', []))
+  
+    return this.getItemIDByName(term).pipe(
+      switchMap((id: string) => {
+        const url = `${this.itemsUrl}/item/${id}`;
+        return this.http.get<Item[]>(url).pipe(
+          tap(x => x.length ?
+            console.log(`found items matching "${term}"`) :
+            console.log(`no items matching "${term}"`)
+          ),
+          catchError(this.handleError<Item[]>('searchItems', []))
+        );
+      })
     );
-}
+  }
 
   /**
    * Handle Http operation that failed.
