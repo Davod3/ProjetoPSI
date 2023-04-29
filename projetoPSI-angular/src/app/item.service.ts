@@ -38,6 +38,20 @@ export class ItemService {
     );
   }
 
+  /* GET items whose name contains search term */
+  searchItems(term: string): Observable<Item[]> {
+    if (!term.trim()) {
+    // if not search term, return empty item array.
+    return of([]);
+    }
+    return this.http.get<Item[]>(`${this.itemsUrl}/?name=${term}`).pipe(
+    tap(x => x.length ?
+        console.log(`found items matching "${term}"`) :
+        console.log(`no items matching "${term}"`)),
+    catchError(this.handleError<Item[]>('searchItems', []))
+    );
+}
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

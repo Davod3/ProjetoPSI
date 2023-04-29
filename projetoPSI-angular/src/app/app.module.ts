@@ -14,6 +14,7 @@ import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 import { SeguidoresComponent } from './seguidores/seguidores.component';
 import { FollowingComponent } from './following/following.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ItemSearchComponent } from './item-search/item-search.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProfileComponent } from './profile/profile.component';
     BibliotecaComponent,
     SeguidoresComponent,
     FollowingComponent,
-    ProfileComponent
+    ProfileComponent,
+    ItemSearchComponent
   ],
   imports: [
     BrowserModule,
