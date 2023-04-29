@@ -9,6 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListasComponent } from './listas/listas.component';
+import { BibliotecaComponent } from './biblioteca/biblioteca.component';
+import { SeguidoresComponent } from './seguidores/seguidores.component';
+import { FollowingComponent } from './following/following.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
@@ -18,6 +22,10 @@ import { ProfileComponent } from './profile/profile.component';
     ItemDetailComponent,
     RegistrationComponent,
     DashboardComponent,
+    ListasComponent,
+    BibliotecaComponent,
+    SeguidoresComponent,
+    FollowingComponent,
     ProfileComponent
   ],
   imports: [

@@ -1,0 +1,24 @@
+.dashboard-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.dashboard-links {
+    text-align: center;
+    border: 3px solid black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-links li {
+    display: inline-block;
+    margin-right: 1em;
+    padding: 0 65px;
+    border-right: 1px solid black;
+}
+
+.dashboard-links li:last-child {
+    border-right: none;
+}

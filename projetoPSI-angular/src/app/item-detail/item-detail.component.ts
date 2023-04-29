@@ -12,7 +12,7 @@ import { ItemService } from '../item.service';
 })
 export class ItemDetailComponent {
 
-  item : Item;
+  @Input() item : Item;
 
   constructor(
     private route: ActivatedRoute,
