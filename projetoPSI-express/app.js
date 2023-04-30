@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 
 var cors = require('cors')
 var app = express();
+
 app.use(cors())
 
 const mongoose = require("mongoose");

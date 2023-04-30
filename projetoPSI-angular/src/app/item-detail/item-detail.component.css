@@ -92,6 +92,7 @@ html, body{
     font-size: 36px;
     margin-bottom: 20px;
     font-weight: bold;
+    color: #d4af37;
   }
   
   .item-details .type {
@@ -148,9 +149,7 @@ html, body{
     }
   
   .item-details button {
-    background-color: #4CAF50;
     border: none;
-    color: white;
     padding: 12px 24px;
     text-align: center;
     text-decoration: none;
@@ -160,10 +159,7 @@ html, body{
     margin-top: 20px;
     cursor: pointer;
   }
-  
-  .item-details button:hover {
-    background-color: #3e8e41;
-  }
+
 
   @media only screen and (max-width: 800px) {
     .main-box{

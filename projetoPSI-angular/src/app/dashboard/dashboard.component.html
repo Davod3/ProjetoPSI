@@ -4,15 +4,16 @@
     <h2> Welcome back!</h2>    
 
     <ul class="dashboard-links">
-        <li><a (click)="listas()">Listas</a></li>
-        <li><a (click)="biblioteca()">Biblioteca de Itens</a></li>
-        <li><a (click)="seguidores()">Followers</a></li>
-        <li><a (click)="following()">Following</a></li>
-        <li><a (click)="profile()">Perfil</a></li>
-        <li><a (click)="logout()">Logout</a>
+        <li tabindex="0" (click)="listas()" (keydown.enter)="listas()"><a>Lists</a></li>
+        <li tabindex="0" (click)="biblioteca()" (keydown.enter)="biblioteca()"><a>Item library</a></li>
+        <li tabindex="0" (click)="seguidores()" (keydown.enter)="seguidores()"><a>Followers</a></li>
+        <li tabindex="0" (click)="following()" (keydown.enter)="following()"><a>Following</a></li>
+        <li tabindex="0" (click)="profile()" (keydown.enter)="profile()"><a>Profile</a></li>
+        <li tabindex="0" (click)="logout()" (keydown.enter)="logout()"><a>Logout</a>
     </ul>
 
-    <p>Search for games here: </p>
-    <app-item-search></app-item-search>
-
+    <div class="search">
+        <p>Search for games here: </p>
+        <app-item-search></app-item-search>
+    </div>
 </div>
