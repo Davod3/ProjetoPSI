@@ -107,8 +107,6 @@ export class AuthenticationService {
 
   public logout(): void {
 
-    console.log("This happens oui oui")
-
     this.token = '';
     window.localStorage.removeItem('user-token');
     this.router.navigateByUrl('/login');

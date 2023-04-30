@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { UserToken } from '../token'
@@ -8,7 +8,7 @@ import { UserToken } from '../token'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   credentials: UserToken = {
     username: '',
@@ -21,6 +21,14 @@ export class LoginComponent {
     private authenticator: AuthenticationService,
     private router: Router
   ){}
+
+  ngOnInit(): void {
+
+    if(this.authenticator.isLoggedIn()){
+      this.router.navigateByUrl('/dashboard');
+    }
+
+  }
 
   login() {
 
