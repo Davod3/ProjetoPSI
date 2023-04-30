@@ -1,11 +1,12 @@
 <div>
   <input type="text" placeholder="Search for items..." (keyup)="search($event)">
 </div>
-<div *ngIf="items$ | async as items; else noResults">
+<div *ngIf="items$ | async as items">
   <ul>
     <li *ngFor="let item of items">{{ item.name }}</li>
   </ul>
+  <p *ngIf="items.length === 0">No results found.</p>
 </div>
-<ng-template #noResults>
+<!-- <ng-template #noResults>
   <p>No results found.</p>
-</ng-template>
+</ng-template> -->
