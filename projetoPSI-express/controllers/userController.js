@@ -17,8 +17,7 @@ exports.login = function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      const token = user.generateJwt();
-      res.status(200).json({ token: token });
+      res.redirect('/profile');
     });
   })(req, res, next);
 };
