@@ -10,6 +10,7 @@ exports.user_profile = (req, res, next) =>{
 }
 
 exports.login = function(req, res, next) {
+  console.log(req.body); 
   passport.authenticate('local', function(err, user, info) {
     if (err) { 
       return next(err); 
@@ -21,7 +22,8 @@ exports.login = function(req, res, next) {
       if (err) { 
         return next(err); 
       }
-      return res.redirect('/profile/' + req.user._id);
+      return res.redirect('/dashboard');
     });
   })(req, res, next);
 };
+

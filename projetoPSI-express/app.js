@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 
 var cors = require('cors')
 var app = express();
+app.options('*', cors());
 app.use(cors())
 
 app.listen('3057');
