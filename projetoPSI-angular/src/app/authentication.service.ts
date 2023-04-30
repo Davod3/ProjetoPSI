@@ -55,7 +55,7 @@ export class AuthenticationService {
     const user = this.getUser();
 
     if(user) {
-      return user.exp > Date.now() / 1000;
+      return user.expires > Date.now() / 1000;
     } else {
       return false;
     }
@@ -73,6 +73,12 @@ export class AuthenticationService {
       return response;
 
     }), catchError(this.handleError<ResponseToken>(null)));
+  }
+
+  public logout(): void {
+    this.token = '';
+    window.localStorage.removeItem('user-token');
+    this.router.navigateByUrl('/');
   }
 
   private handleError<T>(result?: T) {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user';
 import { AuthenticationService } from '../authentication.service';
@@ -8,30 +8,47 @@ import { AuthenticationService } from '../authentication.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
 
   constructor(private router: Router, private authService: AuthenticationService) {}
 
+  private user : User;
+
+  ngOnInit(): void {
+
+    if(this.authService.isLoggedIn()){
+
+      this.user = this.authService.getUser();
+
+    } else {
+
+      this.router.navigateByUrl('/registration');
+
+    }
+  }
+
   biblioteca(): void {
-    this.router.navigate(["/biblioteca"]);
+    this.router.navigate([`/biblioteca/${this.user._id}`]);
   }
 
   listas(): void {
-    this.router.navigate(["/listas"]);
+    this.router.navigate([`/listas/${this.user._id}`]);
   }
 
   seguidores(): void {
-    this.router.navigate(["/seguidores"]);
+    this.router.navigate([`/followers/${this.user._id}`]);
   }
 
   following(): void {
-    this.router.navigate(["/following"]);
+    this.router.navigate([`/following/${this.user._id}`]);
   }
 
   profile(): void {
-    const user = this.authService.getUser();;
-    const id = user._id;
-    console.log(id);
-    this.router.navigate([`/profile/${id}`]);
+    this.router.navigate([`/profile/${this.user._id}`]);
+  }
+
+  logout(): void {
+
+    this.authService.logout();
   }
 }
