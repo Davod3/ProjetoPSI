@@ -4,7 +4,7 @@
 <div *ngIf="items$ | async as items">
   <ul class="search-result">
     <li *ngFor="let item of items">
-      <a href="#">{{ item.name }}</a>
+      <a routerLink = "/item/{{item._id}}">{{ item.name }}</a>
     </li>
   </ul>
   <p class="no-results" *ngIf="items.length === 0">No results found.</p>
