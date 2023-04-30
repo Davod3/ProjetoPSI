@@ -8,7 +8,7 @@ exports.user_profile = (req, res, next) =>{
     .then(function(user){
       res.json(user);
     });
-  };
+ }
 
 exports.user_lists = (req, res, next) =>{
   User.findById(req.params.id).then(
