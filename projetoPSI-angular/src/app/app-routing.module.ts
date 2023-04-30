@@ -8,6 +8,7 @@ import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 import { ListasComponent } from './listas/listas.component';
 import { FollowingComponent } from './following/following.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ItemSearchComponent } from './item-search/item-search.component';
 import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'items', component: ItemsComponent },
   { path: 'item/:id', component: ItemDetailComponent },
+  { path: 'search', component: ItemSearchComponent},
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegistrationComponent},
