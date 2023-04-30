@@ -1,4 +1,28 @@
 <div>
-    <h1 class="listas-title">Listas</h1>
-    <div>Not implemented yet</div>
+    <h1 class="lists-title">User Lists</h1>
+
+    <div *ngIf = "lists.length > 0; then thenBlock else elseBlock "></div>
+
+    <ng-template #thenBlock>
+
+        <div>
+
+            <ul class="lists">
+                <li *ngFor="let list of lists">{{ list.name }}</li>
+            </ul>
+           
+        </div>
+
+    </ng-template>
+
+    <ng-template #elseBlock>
+
+        <h2> User does not have any custom list</h2>
+
+    </ng-template>
+
+    <div class="back">
+        <button type="button" (click)="goBack()">Go back</button>
+    </div>
+    
 </div>

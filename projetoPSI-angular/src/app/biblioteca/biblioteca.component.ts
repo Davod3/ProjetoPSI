@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemService } from '../item.service';
 import { Item } from '../item';
+import { UserService } from '../user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-biblioteca',
@@ -11,10 +13,35 @@ export class BibliotecaComponent implements OnInit {
 
   items: Item[] = [];
 
-  constructor(private itemService: ItemService){}
+  constructor(
+
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private location: Location
+    
+    ){}
 
   ngOnInit(): void {
-      this.itemService.getItems().subscribe(items => this.items = items);
+    
+      this.buildPage();
+
   }
+
+  private buildPage(): void {
+    
+    const id = String(this.route.snapshot.paramMap.get('id'));
+  
+    this.userService.getUserLibrary(id)
+      .subscribe(library => {
+          
+        this.items = library;
+  
+        });
+      
+    }
+
+    goBack(): void {
+      this.location.back();
+    }
 
 }

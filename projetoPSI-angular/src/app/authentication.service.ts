@@ -56,7 +56,7 @@ export class AuthenticationService {
     const user = this.getUser();
 
     if(user) {
-      return user.exp > Date.now() / 1000;
+      return user.expires > Date.now() / 1000;
     } else {
       return false;
     }
@@ -76,6 +76,7 @@ export class AuthenticationService {
     }), catchError(this.handleError<ResponseToken>(null)));
   }
 
+
   public login(userToken: UserToken): Observable<ResponseToken> {
     return this.http.post<ResponseToken>(`${this.url}/login`, userToken, this.httpOptions)
       .pipe(
@@ -90,7 +91,7 @@ export class AuthenticationService {
           return of(null);
         })
       );
-  }
+ }
 
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {

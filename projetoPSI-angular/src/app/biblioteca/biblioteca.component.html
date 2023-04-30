@@ -1,7 +1,27 @@
 <div class="biblioteca">
     <h1 class="biblioteca-title">Biblioteca de Itens</h1>
-    <div>
-        <app-item-detail *ngFor="let item of items" [item]="item"></app-item-detail>
+
+    <div *ngIf = "items.length > 0; then thenBlock else elseBlock "></div>
+
+    <ng-template #thenBlock>
+
+        <div>
+            <ul class="library">
+                <li *ngFor="let item of items">{{ item.name }}</li>
+            </ul>
+        </div>
+
+    </ng-template>
+
+    <ng-template #elseBlock>
+
+        <h2> User does not own any items</h2>
+
+    </ng-template>
+
+    <div class="back">
+        <button type="button" (click)="goBack()">Go back</button>
     </div>
+
 </div>
 

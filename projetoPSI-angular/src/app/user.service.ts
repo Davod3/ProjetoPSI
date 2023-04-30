@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from './user';
+import { List } from './list';
+import { Item } from './item';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +19,51 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  constructor(private http: HttpClient) { }
+
   getUser(_id: string): Observable<User> {
-    const url = `${this.url}/profile/${_id}`;
+    const url = `${this.url}/user/${_id}`;
     return this.http.get<User[]>(url).pipe(
       map(users => users[0]), // Return only the first element of the array
-      tap(user => console.log(user)),
       catchError(this.handleError<User>(null))
     );
   }
 
-  constructor(private http: HttpClient) { }
+  getUserLists(id: string): Observable<List[]> {
+    const url = `${this.url}/user/lists/${id}`;
+    return this.http.get<List[]>(url).pipe(
+      tap((response: List[]) => {
+        return response;
+      }), catchError(this.handleError<List[]>(null))
+    );
+  }
+
+  getUserFollowing(id: string): Observable<User[]> {
+    const url = `${this.url}/user/following/${id}`;
+    return this.http.get<User[]>(url).pipe(
+      tap((response: User[]) => {
+        return response;
+      }), catchError(this.handleError<User[]>(null))
+    );
+  }
+
+  getUserFollowers(id: string): Observable<User[]> {
+    const url = `${this.url}/user/followers/${id}`;
+    return this.http.get<User[]>(url).pipe(
+      tap((response: User[]) => {
+        return response;
+      }), catchError(this.handleError<User[]>(null))
+    );
+  }
+
+  getUserLibrary(id: string): Observable<Item[]> {
+    const url = `${this.url}/user/library/${id}`;
+    return this.http.get<Item[]>(url).pipe(
+      tap((response: Item[]) => {
+        return response;
+      }), catchError(this.handleError<Item[]>(null))
+    );
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

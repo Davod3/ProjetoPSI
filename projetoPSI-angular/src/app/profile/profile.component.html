@@ -7,13 +7,13 @@
         <div class="username">{{user.username}}</div>
     </div>
     <div class="user-links">
-        <a routerLink="/biblioteca">
+        <a (click)="biblioteca()">
             <div class="link">Library</div></a>
-        <a routerLink="/listas">
+        <a (click)="listas()">
             <div class="link">Lists</div></a>
-        <a routerLink="/seguidores">
+        <a (click)="seguidores()">
             <div class="link">Followers</div></a>
-        <a routerLink="/following">
+        <a (click)="following()">
             <div class="link">Following</div></a>
     </div>
     <div class="back">
