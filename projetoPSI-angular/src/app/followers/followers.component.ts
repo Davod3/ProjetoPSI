@@ -1,45 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { ActivatedRoute} from '@angular/router';
 import { User } from '../user';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-following',
-  templateUrl: './following.component.html',
-  styleUrls: ['./following.component.css']
+  selector: 'app-followers',
+  templateUrl: './followers.component.html',
+  styleUrls: ['./followers.component.css']
 })
-export class FollowingComponent implements OnInit{
+export class FollowersComponent {
 
-  following: User[] = [];
+  followers: User[] = [];
 
   constructor( 
     
     private userService: UserService,
     private route: ActivatedRoute,
-    private location: Location,
+    private location: Location
     
     ){}
 
 
   ngOnInit(): void {
-
+    
       this.buildPage();
-  
+    
   }
 
-  private buildPage(): void {
+ private buildPage(): void {
     
     const id = String(this.route.snapshot.paramMap.get('id'));
   
-    this.userService.getUserFollowing(id)
-      .subscribe(following => {
+    this.userService.getUserFollowers(id)
+      .subscribe(followers => {
           
-        this.following = following;
+        this.followers = followers;
   
         });
-        
-  } 
+      
+    } 
 
   goBack(): void {
     this.location.back();
