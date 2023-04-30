@@ -12,10 +12,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/authenticate', authentication_controller.register);
 
-// router.get("/items", item_controller.item_list);
-router.get("/items", function (req, res) {
-  res.send("NOT IMPLEMENTED");
-});
+router.get("/items", item_controller.item_list);
+// router.get("/items", function (req, res) {
+//   res.send("NOT IMPLEMENTED");
+// });
 
 router.get("/item/:id", item_controller.item_detail);
 

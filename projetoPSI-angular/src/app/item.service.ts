@@ -38,33 +38,34 @@ export class ItemService {
     );
   }
 
-  getItemIDByName(name: string): Observable<string> {
-    return this.getItems().pipe(
-      map(items => {
-        const item = items.find(item => item.name === name);
-        return item ? item._id.toString() : '';
+  getItemByName(name: string): Observable<Item> {
+    const url = `${this.itemsUrl}/item?name=${encodeURIComponent(name)}`;
+    console.log(url);
+    return this.http.get<Item>(url).pipe(
+      tap((response: Item) => {
+        console.log(response);
+        return response;
       }),
-      catchError(this.handleError<string>('getItemByName'))
+      catchError(this.handleError<Item>(null))
     );
   }
 
-  searchItems(term: string): Observable<Item[]> {
-    if (!term.trim()) {
-      // if not search term, return empty item array.
-      return of([]);
-    }
-  
-    return this.getItemIDByName(term).pipe(
-      switchMap((id: string) => {
-        const url = `${this.itemsUrl}/item/${id}`;
-        return this.http.get<Item[]>(url).pipe(
-          tap(x => x.length ?
-            console.log(`found items matching "${term}"`) :
-            console.log(`no items matching "${term}"`)
-          ),
-          catchError(this.handleError<Item[]>('searchItems', []))
-        );
-      })
+  searchItems(searchTerm: string): Observable<Item[]> {
+    const url = `${this.itemsUrl}/items`;
+    console.log(url);
+    return this.http.get<Item[]>(url).pipe(
+      map(items => {
+        // filter items whose name partially matches the search term
+        return items.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      }),
+      tap(filteredItems => {
+        if (filteredItems.length === 0) {
+          console.log(`No results found for "${searchTerm}"`);
+        } else {
+          console.log(`${filteredItems.length} results found for "${searchTerm}"`);
+        }
+      }),
+      catchError(this.handleError<Item[]>('searchItems', []))
     );
   }
 
