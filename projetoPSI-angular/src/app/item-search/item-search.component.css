@@ -12,12 +12,12 @@ input {
   max-width: 600px;
   box-sizing: border-box;
   display: block;
-  border: 1px solid #ccc;
+  border: 1px solid #d4af37;
   border-radius: 4px;
 }
 
 input:focus {
-  outline: #336699 auto 1px;
+  outline: #d4af37 auto 1px;
 }
 
 li {
@@ -38,7 +38,7 @@ li {
 }
 
 .search-result li a:hover {
-  background-color: #435A60;
+  background-color: #d4af37;
   color: white;
 }
 

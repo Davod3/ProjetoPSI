@@ -46,10 +46,17 @@ a {
 
 .user-links > *{
     font-size: 3rem;
-    background-color: #a6a6a6;
-    border-radius: 10px;
+    border: 3px solid #d4af37;
+    transition: color 0.2s linear;
+    transition: background-color 0.2s linear;
     width: 90%;
     text-align: center;
+}
+
+.user-links > *:hover{
+    cursor: pointer;
+    background-color: #b4952f;
+    color: white;
 }
 
 .back{
@@ -59,9 +66,7 @@ a {
 }
 
 .back button {
-    background-color: #4CAF50;
     border: none;
-    color: white;
     padding: 12px 24px;
     text-align: center;
     text-decoration: none;
@@ -72,10 +77,6 @@ a {
     align-items: center;
     justify-content: center;
     margin-left: 25%;
-  }
-  
-  .back button:hover {
-    background-color: #3e8e41;
   }
 
   @media only screen and (max-width: 600px) {
