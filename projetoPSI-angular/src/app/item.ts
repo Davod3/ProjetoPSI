@@ -9,4 +9,5 @@ export interface Item {
     rating: number;
     reviews: string[];
     image: string;
+    video: string;
   }

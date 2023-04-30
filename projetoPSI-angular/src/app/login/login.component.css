@@ -40,13 +40,13 @@ button[type="submit"] {
   font-size: 18px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #d4af37;
   color: #fff;
   cursor: pointer;
 }
 
 button[type="submit"]:hover {
-  background-color: #0062cc;
+  background-color: #b4952f;
 }
 
 .form-errors{
