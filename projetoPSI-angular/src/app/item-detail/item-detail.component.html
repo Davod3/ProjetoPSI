@@ -13,6 +13,10 @@
             <li *ngFor="let review of item.reviews">{{review}}</li>
           </ul>
         </div>
+        <div class="item-video">
+          <b>Video link:</b>
+          <a href={{item.video}} target="_blank"> Video</a>
+        </div>
       </div>
       <div class="item-image">
         <img [src]="item.image" alt="{{item.name}} Image">
