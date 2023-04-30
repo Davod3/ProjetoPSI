@@ -20,8 +20,8 @@ export class AuthenticationService {
   };
 
   constructor(
-    private http: HttpClient, 
-    private router: Router) 
+    private http: HttpClient,
+    private router: Router)
     {};
 
   private saveToken(token: string): void {
@@ -75,11 +75,33 @@ export class AuthenticationService {
     }), catchError(this.handleError<ResponseToken>(null)));
   }
 
+  public login(userToken: UserToken): Observable<ResponseToken> {
+    return this.http.post<ResponseToken>(`${this.url}/login`, userToken, this.httpOptions)
+      .pipe(tap((response: ResponseToken) => {
+
+        if(response.token){
+          this.saveToken(response.token);
+        }
+        return response;
+      }), catchError(this.handleError<ResponseToken>(null)));
+  }
+
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      
+
       //Return observable with default result
       return of(result as T);
     };
   }
+
+  public setAuthToken(token: string): void {
+    this.saveToken(token);
+  }
+
+  public logout(): void {
+    this.token = '';
+    window.localStorage.removeItem('mean-token');
+    this.router.navigateByUrl('/');
+  }
+
 }
