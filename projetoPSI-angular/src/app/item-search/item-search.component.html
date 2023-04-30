@@ -1,0 +1,14 @@
+<div>
+  <input type="text" placeholder="Search for items..." (keyup)="search($event)">
+</div>
+<div *ngIf="items$ | async as items">
+  <ul class="search-result">
+    <li *ngFor="let item of items">
+      <a routerLink = "/item/{{item._id}}">{{ item.name }}</a>
+    </li>
+  </ul>
+  <p class="no-results" *ngIf="items.length === 0">No results found.</p>
+</div>
+<ng-template #noResults>
+  <p>No results found.</p>
+</ng-template>
