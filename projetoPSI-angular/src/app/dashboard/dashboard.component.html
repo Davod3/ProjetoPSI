@@ -1,10 +1,11 @@
 <div class="dashboard">
     <h1 class="dashboard-title">Dashboard</h1>
     <ul class="dashboard-links">
-        <li><a routerlink="/listas" (click)="listas()">Listas</a></li>
-        <li><a routerlink="/biblioteca" (click)="biblioteca()">Biblioteca de Itens</a></li>
-        <li><a routerlink="/seguidores" (click)="seguidores()">Followers</a></li>
-        <li><a routerlink="/following" (click)="following()">Following</a></li>
-        <li><a routerlink="/perfil" (click)="profile()">Perfil</a></li>
+        <li><a (click)="listas()">Listas</a></li>
+        <li><a (click)="biblioteca()">Biblioteca de Itens</a></li>
+        <li><a (click)="seguidores()">Followers</a></li>
+        <li><a (click)="following()">Following</a></li>
+        <li><a (click)="profile()">Perfil</a></li>
+        <li><a (click)="logout()">Logout</a>
     </ul>
 </div>
