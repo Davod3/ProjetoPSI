@@ -29,8 +29,7 @@ export class LoginComponent {
 
     if (this.credentials.username && this.credentials.password) {
 
-      this.authenticator.login(this.credentials).subscribe((response: any) => {
-
+      this.authenticator.login(this.credentials).subscribe((response) => {
         if (response) {
 
           console.log("User logged in!");

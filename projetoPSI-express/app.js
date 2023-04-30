@@ -10,7 +10,6 @@ var usersRouter = require('./routes/users');
 
 var cors = require('cors')
 var app = express();
-app.options('*', cors());
 app.use(cors())
 
 app.listen('3057');
@@ -37,7 +36,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
-app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -45,14 +43,6 @@ app.use('/users', usersRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
-});
-
-// Catch unauthorised errors
-app.use(function (err, req, res, next) {
-  if (err.name === 'UnauthorizedError') {
-    res.status(401);
-    res.json({"message" : err.name + ": " + err.message});
-  }
 });
 
 // error handler

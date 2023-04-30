@@ -2,26 +2,26 @@ var express = require('express');
 var router = express.Router();
 
 const authentication_controller = require('../controllers/authController');
-const item_controller = require('../controllers/itemController');
 const user_controller = require('../controllers/userController');
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/login', user_controller.login);
+router.post('/login', function(req, res, next) {
+  user_controller.login(req, res, function(err, result) {
+    if (err) {
+      console.error("Error occurred: ", err);
+      return next(err);
+    }
 
-router.post('/authenticate', authentication_controller.register);
-
-// router.get("/items", item_controller.item_list);
-router.get("/items", function (req, res) {
-  res.send("NOT IMPLEMENTED");
+    console.log("Authentication successful for user ", result.username);
+    res.send(result);
+  });
 });
 
-router.get("/item/:id", item_controller.item_detail);
-
-router.get("/profile/:id", user_controller.user_profile);
+router.post('/authenticate', authentication_controller.register);
 
 module.exports = router;
 

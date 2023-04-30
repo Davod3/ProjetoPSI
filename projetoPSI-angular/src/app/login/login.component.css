@@ -48,3 +48,17 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #0062cc;
 }
+
+.form-errors{
+
+	margin: 10px 0px;
+	padding: 15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+  color: red;
+
+}
+
+.form-error-list {
+  list-style: none;
+}
