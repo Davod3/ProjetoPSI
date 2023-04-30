@@ -3,6 +3,7 @@ var router = express.Router();
 
 const authentication_controller = require('../controllers/authController');
 const user_controller = require('../controllers/userController');
+const item_controller = require('../controllers/itemController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

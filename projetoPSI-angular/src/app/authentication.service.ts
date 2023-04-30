@@ -64,7 +64,7 @@ export class AuthenticationService {
   }
 
   public register(userToken: UserToken): Observable<ResponseToken> {
-    return this.http.post<ResponseToken>(`${this.url}/authenticate`, userToken, this.httpOptions)
+    return this.http.post<ResponseToken>(`${this.url}/register`, userToken, this.httpOptions)
     .pipe(tap((response: ResponseToken) => {
 
       if(response.token){
@@ -106,9 +106,12 @@ export class AuthenticationService {
   }
 
   public logout(): void {
+
+    console.log("This happens oui oui")
+
     this.token = '';
-    window.localStorage.removeItem('mean-token');
-    this.router.navigateByUrl('/');
+    window.localStorage.removeItem('user-token');
+    this.router.navigateByUrl('/login');
   }
 
 }

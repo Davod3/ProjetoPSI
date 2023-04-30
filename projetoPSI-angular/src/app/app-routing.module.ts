@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'item/:id', component: ItemDetailComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegistrationComponent}
+  { path: 'register', component: RegistrationComponent},
   { path: 'biblioteca/:id', component: BibliotecaComponent},
   { path: 'listas/:id', component: ListasComponent},
   { path: 'followers/:id', component: FollowersComponent},
