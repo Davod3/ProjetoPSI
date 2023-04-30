@@ -75,6 +75,12 @@ export class AuthenticationService {
     }), catchError(this.handleError<ResponseToken>(null)));
   }
 
+  public logout(): void {
+    this.token = '';
+    window.localStorage.removeItem('user-token');
+    this.router.navigateByUrl('/');
+  }
+
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       
