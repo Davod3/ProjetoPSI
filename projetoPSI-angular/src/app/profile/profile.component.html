@@ -7,13 +7,13 @@
         <div class="username">{{user.username}}</div>
     </div>
     <div class="user-links">
-        <a (click)="biblioteca()">
+        <a tabindex="0" (click)="biblioteca()" (keydown.enter)="biblioteca()">
             <div class="link">Library</div></a>
-        <a (click)="listas()">
+        <a tabindex="0" (click)="listas()" (keydown.enter)="listas()">
             <div class="link">Lists</div></a>
-        <a (click)="seguidores()">
+        <a tabindex="0" (click)="seguidores()" (keydown.enter)="seguidores()">
             <div class="link">Followers</div></a>
-        <a (click)="following()">
+        <a tabindex="0" (click)="following()" (keydown.enter)="following()">
             <div class="link">Following</div></a>
     </div>
     <div class="back">
