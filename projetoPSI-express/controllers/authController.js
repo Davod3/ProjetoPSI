@@ -68,3 +68,21 @@ exports.register = function(req, res, next) {
     }
 
 } 
+
+exports.login = function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      
+      if (err) { 
+        return next(err); 
+      }
+      
+      if (!user) {
+        return res.status(401).json({ err: 'Incorrect username or password' });
+      }
+  
+      const token = user.genJwt();
+  
+      return res.status(200).json({ token: token });
+      
+    })(req, res, next);
+  };

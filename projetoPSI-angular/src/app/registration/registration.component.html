@@ -6,7 +6,7 @@
     <div class="form-group">
       <label for="username">Username: </label>
       <input
-        type="text"
+        type="username"
         class="form-control"
         name="username"
         placeholder="Enter your username"
@@ -30,6 +30,8 @@
         <li *ngFor="let error of credentials.err">{{ error }}</li>
       </ul>
     </div>
+
+    <p>Já tem conta? <a routerLink="/login">Inicie Sessão!</a></p>
 
     <button type="submit" class="btn">Registar</button>
   </form>

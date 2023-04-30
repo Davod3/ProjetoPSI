@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserToken } from '../token'
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit{
 
   credentials: UserToken = {
     username: '',
@@ -24,6 +24,14 @@ export class RegistrationComponent {
   ){
 
   };
+
+  ngOnInit(): void {
+
+    if(this.authenticator.isLoggedIn()){
+      this.router.navigateByUrl('/dashboard');
+    }
+
+  }
 
   register() {
 
@@ -41,9 +49,6 @@ export class RegistrationComponent {
         this.credentials.isValid = false;
         this.credentials.err.push("Password must have more than 8 characters!");
     }
-
-    console.log(this.credentials.password);
-    console.log(validPassword.test(this.credentials.password));
 
     if(!validPassword.test(this.credentials.password)) {
         this.credentials.isValid = false;
