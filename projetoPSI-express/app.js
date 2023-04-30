@@ -12,8 +12,6 @@ var cors = require('cors')
 var app = express();
 app.use(cors())
 
-app.listen('3057');
-
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 const mongoDB = "mongodb://psi007:psi007@localhost:27017/psi007?retryWrites=true&authSource=psi007";
