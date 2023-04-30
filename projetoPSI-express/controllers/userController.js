@@ -11,13 +11,17 @@ exports.user_profile = (req, res, next) =>{
 
 exports.login = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
+    if (err) { 
+      return next(err); 
+    }
     if (!user) {
       return res.status(401).json({ message: 'Incorrect username or password' });
     }
     req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      res.redirect('/profile');
+      if (err) { 
+        return next(err); 
+      }
+      return res.redirect('/profile/' + req.user._id);
     });
   })(req, res, next);
 };

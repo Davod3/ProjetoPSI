@@ -12,10 +12,6 @@ router.post('/', function(req, res, next) {
 
 router.post('/login', user_controller.login);
 
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Login' });
-});
-
 router.post('/authenticate', authentication_controller.register);
 
 // router.get("/items", item_controller.item_list);
