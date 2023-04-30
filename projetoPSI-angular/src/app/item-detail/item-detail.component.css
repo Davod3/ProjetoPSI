@@ -9,6 +9,8 @@ html, body{
     padding: 20px;
     background-color: #f2f2f2;
     border-radius: 10px;
+    border-style: solid;
+    border-color: #d4af37;
     max-height: 40%;
   }
   
