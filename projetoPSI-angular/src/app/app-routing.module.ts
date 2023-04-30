@@ -14,7 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'dashboard', component: DashboardComponent},
-  { path: '', component: AppComponent},
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   { path: 'items', component: ItemsComponent },
   { path: 'item/:id', component: ItemDetailComponent },
   { path: 'biblioteca', component: BibliotecaComponent},
