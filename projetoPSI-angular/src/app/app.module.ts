@@ -29,7 +29,7 @@ import { FollowersComponent } from './followers/followers.component';
     BibliotecaComponent,
     FollowingComponent,
     ProfileComponent,
-    ItemSearchComponent
+    ItemSearchComponent,
     LoginComponent,
     FollowersComponent
   ],
