@@ -13,10 +13,6 @@
             <li *ngFor="let review of item.reviews">{{review}}</li>
           </ul>
         </div>
-        <div class="item-video">
-          <b>Video link:</b>
-          <a href={{item.video}} target="_blank"> Video</a>
-        </div>
       </div>
       <div class="item-image">
         <img [src]="item.image" alt="{{item.name}} Image">
@@ -39,6 +35,12 @@
           <ul>
             <li class="platform-li" *ngFor="let platform of item.platforms">{{platform}}</li>
           </ul>
+        </div>
+        <div class="item-video">
+          <ng-container *ngIf="item.video">
+            <b>Video link:</b>
+            <a href={{item.video}} target="_blank"> Video</a>
+          </ng-container>
         </div>
       </div>
       <div class="info-right">

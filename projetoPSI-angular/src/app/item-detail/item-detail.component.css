@@ -69,6 +69,8 @@ html, body{
     list-style: none;
   }
 
+  a:link { text-decoration: none; }
+
 
   .platform-li{
     display: inline;
