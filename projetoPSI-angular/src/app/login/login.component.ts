@@ -24,7 +24,6 @@ export class LoginComponent {
 
   login() {
 
-    console.log("Login button clicked!");
     this.credentials.err = [];
     this.credentials.isValid = true;
 
@@ -32,11 +31,11 @@ export class LoginComponent {
 
       this.authenticator.login(this.credentials).subscribe((response: any) => {
 
-        if (response && response.token) {
+        if (response) {
 
           console.log("User logged in!");
           this.authenticator.setAuthToken(response.token);
-          this.router.navigateByUrl(`/profile/${response.userId}`);
+          this.router.navigateByUrl(`/dashboard`);
 
         } else {
 

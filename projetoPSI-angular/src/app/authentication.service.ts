@@ -7,6 +7,7 @@ import { Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {ResponseToken} from './responseToken';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -77,13 +78,18 @@ export class AuthenticationService {
 
   public login(userToken: UserToken): Observable<ResponseToken> {
     return this.http.post<ResponseToken>(`${this.url}/login`, userToken, this.httpOptions)
-      .pipe(tap((response: ResponseToken) => {
-
-        if(response.token){
-          this.saveToken(response.token);
-        }
-        return response;
-      }), catchError(this.handleError<ResponseToken>(null)));
+      .pipe(
+        tap((response: ResponseToken) => {
+          if (response.token) {
+            this.saveToken(response.token);
+          }
+          return response;
+        }),
+        catchError((error) => {
+          console.log('An error occurred:', error);
+          return of(null);
+        })
+      );
   }
 
   private handleError<T>(result?: T) {
