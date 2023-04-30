@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'items', component: ItemsComponent },
   { path: 'item/:id', component: ItemDetailComponent },
   { path: 'biblioteca/:id', component: BibliotecaComponent},
-  { path: 'listas', component: ListasComponent},
+  { path: 'listas/:id', component: ListasComponent},
   { path: 'followers/:id', component: FollowersComponent},
   { path: 'following/:id', component: FollowingComponent},
   { path: 'profile/:id', component: ProfileComponent }

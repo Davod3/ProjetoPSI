@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
+import { ActivatedRoute} from '@angular/router';
 import { User } from '../user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-following',
@@ -12,52 +12,37 @@ import { User } from '../user';
 export class FollowingComponent implements OnInit{
 
   following: User[] = [];
-  user: User;
 
   constructor( 
     
     private userService: UserService,
     private route: ActivatedRoute,
-    private authService: AuthenticationService,
-    private router: Router){}
+    private location: Location,
+    
+    ){}
 
 
   ngOnInit(): void {
-    
-    if(this.authService.isLoggedIn()){
-      
-      console.log("This happens 1");
 
       this.buildPage();
-
-      console.log("This happens 2");
-  
-    } else {
-  
-      this.router.navigateByUrl('/registration');
-  
-    }
   
   }
 
   private buildPage(): void {
     
     const id = String(this.route.snapshot.paramMap.get('id'));
-
-    this.userService.getUser(id)
-      .subscribe(user => {
-        this.user = user
-        
-        this.user.following.forEach(followid => {
+  
+    this.userService.getUserFollowing(id)
+      .subscribe(following => {
           
-          this.userService.getUser(followid).subscribe(user => this.following.push(user));
-
+        this.following = following;
+  
         });
+        
+  } 
 
-        console.log(this.user);
-
-      });
-    
+  goBack(): void {
+    this.location.back();
   }
 
 }

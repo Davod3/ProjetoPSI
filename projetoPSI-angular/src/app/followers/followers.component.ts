@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
+import { ActivatedRoute} from '@angular/router';
 import { User } from '../user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-followers',
@@ -12,48 +12,37 @@ import { User } from '../user';
 export class FollowersComponent {
 
   followers: User[] = [];
-  user: User;
 
   constructor( 
     
     private userService: UserService,
     private route: ActivatedRoute,
-    private authService: AuthenticationService,
-    private router: Router){}
+    private location: Location
+    
+    ){}
 
 
   ngOnInit(): void {
     
-    if(this.authService.isLoggedIn()){
-        
-  
       this.buildPage();
-    
-    } else {
-    
-      this.router.navigateByUrl('/registration');
-    
-    }
     
   }
 
-  private buildPage(): void {
+ private buildPage(): void {
     
     const id = String(this.route.snapshot.paramMap.get('id'));
   
-    this.userService.getUser(id)
-      .subscribe(user => {
+    this.userService.getUserFollowers(id)
+      .subscribe(followers => {
           
-        this.user = user
-          
-        this.user.followers.forEach(followerid => {
-            
-          this.userService.getUser(followerid).subscribe(user => this.followers.push(user));
-  
-        });
+        this.followers = followers;
   
         });
       
-    }
+    } 
+
+  goBack(): void {
+    this.location.back();
+  }
 
 }
