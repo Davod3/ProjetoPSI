@@ -14,7 +14,7 @@ import {ResponseToken} from './responseToken';
 export class AuthenticationService {
 
   private token: string;
-  private url: string = 'http://localhost:3057';
+  private url: string = 'http://appserver.alunos.di.fc.ul.pt:3057';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
