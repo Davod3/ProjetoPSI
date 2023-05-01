@@ -75,8 +75,8 @@ export class RegistrationComponent implements OnInit{
             });
   
           } else {
-  
-            console.log("User registered!");
+
+            alert("User sucessfully registered!");
   
             //Redirect to dashboard
             this.router.navigateByUrl('/dashboard');
