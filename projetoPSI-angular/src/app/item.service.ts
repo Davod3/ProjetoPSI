@@ -9,7 +9,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 })
 export class ItemService {
 
-  private itemsUrl = 'http://appserver.alunos.di.fc.ul.pt:3057';
+  private itemsUrl = 'http://localhost:3057';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
