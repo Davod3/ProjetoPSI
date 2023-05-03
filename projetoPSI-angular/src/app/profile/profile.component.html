@@ -4,7 +4,10 @@
         <div class="user-image">
             <img [src]="user.image" alt="{{user.username}} Image">
         </div>
-        <div class="username">{{user.username}}</div>
+        <div class="username">
+            {{user.username}}
+            <!-- <img src="https://www.vhv.rs/dpng/d/439-4390267_edit-modify-ico-edit-pencil-icon-png-transparent.png"> -->
+        </div>
     </div>
     <div class="user-links">
         <a tabindex="0" (click)="biblioteca()" (keydown.enter)="biblioteca()">

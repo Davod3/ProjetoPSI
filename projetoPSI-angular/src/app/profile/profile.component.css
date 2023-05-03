@@ -81,6 +81,27 @@ a {
     margin-left: 25%;
   }
 
+  @media only screen and (max-height: 550px) {
+
+    .user-links >*{
+        gap:5%;
+        max-height: 10%;
+        font-size: 100%;
+    }
+
+    .user-image{
+        padding-left: 33%;
+    }
+
+    .user-image img{
+        width: 50%;
+    }
+
+    .username{
+        font-size: 100%;
+    }
+  }
+
   @media only screen and (max-width: 600px) {
     .content{
         display: flex;
