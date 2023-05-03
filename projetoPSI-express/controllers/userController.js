@@ -130,7 +130,18 @@ exports.addItemToCart = (req, res, next) =>{
 
             //Add item to user cart
 
-            user.cart.set([itemid, "1"]);
+            if(user.cart.has(itemid)){
+
+              //User already has item, increase counter
+              let nItems = parseInt(user.cart.get(itemid)) + 1;
+              user.cart.set(itemid, nItems); 
+
+            } else {
+
+              user.cart.set(itemid, "1");
+
+            }
+
             user.save();
             res.send("Item added!");
 
