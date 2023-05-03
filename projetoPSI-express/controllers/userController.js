@@ -110,7 +110,47 @@ exports.user_following = (req, res, next) =>{
 
 };
 
+exports.addItemToCart = (req, res, next) =>{
+
+  let itemid = req.body.itemid;
+  let userid = req.body.userid;
+
+  if(userid) {
+
+    User.findById(userid).then(
+      
+      function(user) {
+
+        Item.findById(itemid).then(
+
+          function(item) {
+
+
+            //Check if user already has item
+
+            //Add item to user cart
+
+            user.cart.set([itemid, "1"]);
+            user.save();
+            res.send("Item added!");
+
+          }
+
+        ).catch(err => handleError(err, res));
+
+      }).catch(err => handleError(err, res));
+
+    } else {
+
+      res.send("Must provide valid user id");
+
+    };
+
+  } 
+
 function handleError(err, res) {
+
+  console.log(err);
 
   res.status(404);
   res.send(err.message);
