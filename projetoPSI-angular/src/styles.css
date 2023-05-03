@@ -46,6 +46,15 @@ h1 {
   .back button:hover {
     background-color: #b4952f;
   }
+
+  .addToCart button {
+    background-color: #d4af37;
+    color: black;
+  }
+  
+  .addToCart button:hover {
+    background-color: #b4952f;
+  }
   
   /* everywhere else */
   * {

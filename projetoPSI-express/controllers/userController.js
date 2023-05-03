@@ -121,12 +121,10 @@ exports.addItemToCart = (req, res, next) =>{
       
       function(user) {
 
+        //The find by id is just to check if the item is actually on the db
         Item.findById(itemid).then(
 
           function(item) {
-
-
-            //Check if user already has item
 
             //Add item to user cart
 
@@ -143,7 +141,7 @@ exports.addItemToCart = (req, res, next) =>{
             }
 
             user.save();
-            res.send("Item added!");
+            res.send(true);
 
           }
 
@@ -153,7 +151,7 @@ exports.addItemToCart = (req, res, next) =>{
 
     } else {
 
-      res.send("Must provide valid user id");
+      res.send(false);
 
     };
 
