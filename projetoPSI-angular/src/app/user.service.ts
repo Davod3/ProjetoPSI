@@ -29,6 +29,12 @@ export class UserService {
     );
   }
 
+  updateUser(user: User): Observable<any> {
+    return this.http.put(this.url, user, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
   getUserLists(id: string): Observable<List[]> {
     const url = `${this.url}/user/lists/${id}`;
     return this.http.get<List[]>(url).pipe(

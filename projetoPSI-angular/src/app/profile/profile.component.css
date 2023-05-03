@@ -25,10 +25,22 @@ img{
 }
 
 .username{
+    display: flex;
     font-size: 3em;
     text-align: center;
     font-weight: bold;
-    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+}
+
+.username a{
+    min-width: 20px;
+    max-width: 30px;
+}
+.username a img{
+    width: 100%;
+    height: 100%;
 }
 
 .user-links{
@@ -53,6 +65,10 @@ a {
     transition: background-color 0.2s linear;
     width: 90%;
     text-align: center;
+}
+
+.username a:hover{
+    cursor: pointer;
 }
 
 .user-links > *:hover{
@@ -103,6 +119,11 @@ a {
   }
 
   @media only screen and (max-width: 600px) {
+    
+    .username img{
+        max-width: 20px;
+    }
+
     .content{
         display: flex;
         flex-direction: column;
@@ -112,6 +133,7 @@ a {
 
     .username{
         font-size: 2rem;
+        margin: auto;
     }
 
     .user-links > *{

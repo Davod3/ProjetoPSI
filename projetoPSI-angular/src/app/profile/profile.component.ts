@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { AuthenticationService } from '../authentication.service';
 
 
 @Component({
@@ -13,12 +14,14 @@ import { UserService } from '../user.service';
 export class ProfileComponent {
 
   user: User;
+  isLogged: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
   ){}
 
   ngOnInit(): void {
@@ -30,8 +33,24 @@ export class ProfileComponent {
     this.userService.getUser(id)
       .subscribe(user => {
         this.user = user
+        if(this.authService.getUser()._id == this.user._id){
+          this.isLogged = true;
+        }else{
+          this.isLogged = false;
+        }
+        console.log(this.isLogged);
       });
-    
+  }
+
+  save(): void {
+    if (this.user) {
+      this.userService.updateUser(this.user)
+        .subscribe(() => this.goBack());
+    }
+  }
+
+  edit(): void{
+    this.router.navigate([`/profile/edit/${this.user._id}`]);
   }
 
   biblioteca(): void {

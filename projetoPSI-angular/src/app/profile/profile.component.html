@@ -2,11 +2,15 @@
 <div class="content">
     <div class="user-info">
         <div class="user-image">
-            <img [src]="user.image" alt="{{user.username}} Image">
+            <img [src]="user.image" alt="user Image">
         </div>
         <div class="username">
-            {{user.username}}
-            <!-- <img src="https://www.vhv.rs/dpng/d/439-4390267_edit-modify-ico-edit-pencil-icon-png-transparent.png"> -->
+            <div>{{user.username}}</div>
+            <ng-container *ngIf="isLogged == true">
+                <a tabindex="0" (click)="edit()" (keydown.enter)="edit()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/61/61456.png">
+                </a>
+            </ng-container>
         </div>
     </div>
     <div class="user-links">

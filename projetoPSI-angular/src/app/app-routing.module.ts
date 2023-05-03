@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'item/:id', component: ItemDetailComponent },
   { path: 'search', component: ItemSearchComponent},
   { path: 'profile/:id', component: ProfileComponent },
+  { path: 'profile/edit/:id', component: ProfileComponent },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegistrationComponent},
   { path: 'biblioteca/:id', component: BibliotecaComponent},
