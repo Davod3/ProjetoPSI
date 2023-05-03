@@ -33,12 +33,7 @@ export class ProfileComponent {
     this.userService.getUser(id)
       .subscribe(user => {
         this.user = user
-        if(this.authService.getUser()._id == this.user._id){
-          this.isLogged = true;
-        }else{
-          this.isLogged = false;
-        }
-        console.log(this.isLogged);
+        this.isLogged = this.authService.getUser()._id == this.user._id;
       });
   }
 
