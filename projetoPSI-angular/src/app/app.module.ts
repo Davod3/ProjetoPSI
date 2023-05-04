@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FollowersComponent } from './followers/followers.component';
     ProfileComponent,
     ItemSearchComponent,
     LoginComponent,
-    FollowersComponent
+    FollowersComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
