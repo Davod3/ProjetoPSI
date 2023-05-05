@@ -47,32 +47,26 @@ export class EditProfileComponent {
 
   select1(): void{
     this.user.image = this.image1;
-    this.save();
   }
 
   select2(): void{
     this.user.image = this.image2;
-    this.save();
   }
 
   select3(): void{
     this.user.image = this.image3;
-    this.save();
   }
 
   select4(): void{
     this.user.image = this.image4;
-    this.save();
   }
 
   select5(): void{
     this.user.image = this.image5;
-    this.save();
   }
 
   select6(): void{
     this.user.image = this.image6;
-    this.save();
   }
 
   save(): void {
