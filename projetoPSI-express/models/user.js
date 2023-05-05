@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 
 var UserSchema = new mongoose.Schema({
-    username: {type: String, unique: true, required: true, maxLenght: 10},
+    username: {type: String, unique: true, required: true, maxLength: 10, minLength: 3, match: /^[a-zA-Z0-9]+$/},
     password: {type: String, required: true},
     items: [{type: mongoose.Schema.Types.ObjectId, ref: "Item"}],
     followers: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],

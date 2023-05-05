@@ -23,6 +23,7 @@ export class EditProfileComponent {
   
   
   user: User; 
+  error: any;
 
   constructor(
     private location: Location,
@@ -70,10 +71,18 @@ export class EditProfileComponent {
   }
 
   onSubmit(form:any): void{
-    console.log(form.value);
-    console.log(form.value.fusername);
-    this.user.username = form.value.fusername;
+    this.error = null;
+    const username = form.value.fusername;
+    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      this.error = "Username must contain only numbers and letters."
+      return;
+    } else if(username.length < 3 || username.length > 10){
+      this.error = "Username must be between 3 and 10 characters long."
+      return;
+    }
+    this.user.username = username;
     form.resetForm(); 
+    this.save();
   }
 
   save(): void {
