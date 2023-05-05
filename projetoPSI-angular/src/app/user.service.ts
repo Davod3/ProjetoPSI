@@ -31,7 +31,8 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<any> {
-    return this.http.put(this.url, user, this.httpOptions).pipe(
+    const url = `${this.url}/user/edit/${user._id}`;
+    return this.http.post(url, user, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateHero'))
     );
   }
