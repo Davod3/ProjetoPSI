@@ -69,6 +69,13 @@ export class EditProfileComponent {
     this.user.image = this.image6;
   }
 
+  onSubmit(form:any): void{
+    console.log(form.value);
+    console.log(form.value.fusername);
+    this.user.username = form.value.fusername;
+    form.resetForm(); 
+  }
+
   save(): void {
     if (this.user) {
       this.userService.updateUser(this.user)
