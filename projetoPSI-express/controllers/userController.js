@@ -6,6 +6,9 @@ const Item = require('../models/item');
 exports.user_profile = (req, res, next) =>{
     User.find({_id: req.params.id})
     .then(function(user){
+      if (!user || user.length == 0) {
+        return res.status(404).send('User not found');
+      }
       res.json(user);
     });
  }

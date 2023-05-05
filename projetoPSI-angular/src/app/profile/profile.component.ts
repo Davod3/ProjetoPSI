@@ -15,6 +15,7 @@ export class ProfileComponent {
 
   user: User;
   isLogged: boolean;
+  error: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,8 +33,12 @@ export class ProfileComponent {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.userService.getUser(id)
       .subscribe(user => {
-        this.user = user
+        this.user = user;
         this.isLogged = this.authService.getUser()._id == this.user._id;
+      },
+      error => {
+        this.error = 'User not found';
+        console.log(this.error);
       });
   }
 

@@ -1,5 +1,7 @@
-
-<div class="content">
+<div class="error" *ngIf="error">{{error}}    <div class="back">
+    <button type="button" (click)="goBack()">Go back</button>
+</div></div>
+<div *ngIf="!error" class="content">
     <div class="user-info">
         <div class="user-image">
             <img [src]="user.image" alt="user Image">
