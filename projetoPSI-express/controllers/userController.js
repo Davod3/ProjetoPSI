@@ -170,19 +170,41 @@ exports.addItemToCart = (req, res, next) =>{
 
       res.send(false);
 
-    };
+    }
 
-  } 
+  }; 
 
   exports.addFollowing = (req, res, next) => {
     const userId = req.params.id;
     const followingUserId = req.body.followingUserId;
+  
     User.findById(userId)
       .then(user => {
-        user.following.push(followingUserId);
-        return user.save();
+        if (!user) {
+          throw new Error('User not found');
+        }
+  
+        User.findById(followingUserId)
+          .then(followingUser => {
+            if (!followingUser) {
+              throw new Error('Followed user not found');
+            }
+  
+            user.following.push(followingUserId);
+            followingUser.followers.push(userId);
+  
+            user.save()
+              .then(() => {
+                followingUser.save()
+                  .then(() => {
+                    res.json(user);
+                  })
+                  .catch(err => next(err));
+              })
+              .catch(err => next(err));
+          })
+          .catch(err => next(err));
       })
-      .then(user => res.json(user))
       .catch(err => next(err));
   };
 
