@@ -88,7 +88,7 @@ export class UserService {
     );
   }
 
-  addUserToFollowingList(userId: string, followingUserId: string): Observable<User> {
+  addUsersToList(userId: string, followingUserId: string): Observable<User> {
     const url = `${this.url}/user/following/${userId}`;
     return this.http.put<User>(url, {followingUserId}).pipe(
       catchError(this.handleError<User>())

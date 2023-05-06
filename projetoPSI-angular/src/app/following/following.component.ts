@@ -46,7 +46,7 @@ export class FollowingComponent implements OnInit{
   }
 
   followUser(userId: string, followingUserId: string): void {
-    this.userService.addUserToFollowingList(userId, followingUserId)
+    this.userService.addUsersToList(userId, followingUserId)
       .subscribe(user => {
         this.buildPage();
       });
