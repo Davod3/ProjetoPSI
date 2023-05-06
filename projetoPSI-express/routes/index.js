@@ -14,6 +14,8 @@ router.post('/login', authentication_controller.login);
 
 router.get("/items", item_controller.item_list);
 
+router.get("/users", user_controller.user_list);
+
 router.post('/register', authentication_controller.register);
 
 router.get("/item/:id", item_controller.item_detail);

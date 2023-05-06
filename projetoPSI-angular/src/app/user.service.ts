@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { User } from './user';
 import { List } from './list';
@@ -87,6 +87,25 @@ export class UserService {
       }), catchError(this.handleError<any>('addItemToCart', false))
     );
 
+  }
+
+  searchUsers(searchTerm: string): Observable<User[]> {
+    const url = `${this.url}/users`;
+    console.log(url);
+    return this.http.get<User[]>(url).pipe(
+      map(users => {
+        // filter users whose name partially matches the search term
+        return users.filter(user => user.username.toLowerCase().includes(searchTerm.toLowerCase()));
+      }),
+      tap(filteredUsers => {
+        if (filteredUsers.length === 0) {
+          console.log(`No results found for "${searchTerm}"`);
+        } else {
+          console.log(`${filteredUsers.length} results found for "${searchTerm}"`);
+        }
+      }),
+      catchError(this.handleError<User[]>('searchUsers', []))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

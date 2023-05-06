@@ -3,6 +3,21 @@ const User = require('../models/user');
 const List = require('../models/list');
 const Item = require('../models/item');
 
+exports.user_list = async (req, res) => {
+  try {
+    const list_users = await User.find().sort([["name", "ascending"]]);
+    let results = [];
+    list_users.forEach(function(user) {
+      results.push(user);
+    });
+    res.send(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+
+
 exports.user_profile = (req, res, next) =>{
     User.find({_id: req.params.id})
     .then(function(user){
