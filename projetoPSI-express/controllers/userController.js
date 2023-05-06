@@ -153,9 +153,94 @@ exports.addItemToCart = (req, res, next) =>{
 
       res.send(false);
 
-    };
+    }
 
-  } 
+  }; 
+
+  exports.removeItemFromCart = (req, res, next) => {
+    const itemId = req.params.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            user.cart.delete(itemId);
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.clearCart = (req, res, next) => {
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          user.cart.clear();
+          user.save();
+          res.send(true);
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.incrementItemQuantity = (req, res, next) => {
+    const itemId = req.params.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            let nItems = parseInt(user.cart.get(itemId)) + 1;
+            user.cart.set(itemId, nItems);
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.decrementItemQuantity = (req, res, next) => {
+    const itemId = req.params.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            let nItems = parseInt(user.cart.get(itemId)) - 1;
+            if (nItems <= 0) {
+              user.cart.delete(itemId);
+            } else {
+              user.cart.set(itemId, nItems);
+            }
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
 
 function handleError(err, res) {
 

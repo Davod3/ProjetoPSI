@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User } from './user';
 import { List } from './list';
 import { Item } from './item';
+import { ItemService } from './item.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private itemService: ItemService) { }
 
   getUser(_id: string): Observable<User> {
     const url = `${this.url}/user/${_id}`;
@@ -72,6 +74,59 @@ export class UserService {
       }), catchError(this.handleError<any>('addItemToCart', false))
     );
 
+  }
+
+  clearCart(userId: string): Observable<any> {
+    const url = `${this.url}/user/cart/clear`;
+    const body = { userId: userId };
+    return this.http.put<User>(url, body, this.httpOptions).pipe(
+      catchError(this.handleError<User>('clearCart'))
+    );
+  }
+
+  removeItemFromCart(userId: string, itemId: string): Observable<any> {
+    const url = `${this.url}/user/cart/remove`;
+    const body = { userId: userId, itemId: itemId };
+    return this.http.put<User>(url, body, this.httpOptions).pipe(
+      catchError(this.handleError<User>('removeItemFromCart'))
+    );
+  }
+
+  incrementItemQuantity(userId: string, itemId: string): Observable<any> {
+    const url = `${this.url}/user/cart/increment`;
+    const body = { userId: userId, itemId: itemId };
+    return this.http.put<User>(url, body, this.httpOptions).pipe(
+      catchError(this.handleError<User>('incrementItemQuantity'))
+    );
+  }
+
+  decrementItemQuantity(userId: string, itemId: string): Observable<any> {
+    const url = `${this.url}/user/cart/decrement`;
+    const body = { userId: userId, itemId: itemId };
+    return this.http.put<User>(url, body, this.httpOptions).pipe(
+      catchError(this.handleError<User>('decrementItemQuantity'))
+    );
+  }
+
+  getUserCart(userId: string): Observable<Map<string, number>> {
+    const url = `${this.url}/user/cart/${userId}`;
+    return this.http.get<{[key: string]: number}>(url).pipe(
+      map(response => {
+        const cart = new Map<string, number>();
+        for (const key in response) {
+          cart.set(key, response[key]);
+        }
+        return cart;
+      }),
+      catchError(this.handleError<Map<string, number>>(null))
+    );
+  }
+
+  getItemPrice(itemId: string): Observable<number> {
+    return this.itemService.getItem(itemId).pipe(
+      map(item => item.price),
+      catchError(this.handleError<number>(null))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
