@@ -108,17 +108,17 @@ export class UserService {
     );
   }
 
-  getUserCart(userId: string): Observable<Map<string, number>> {
+  getUserCart(userId: string): Observable<Map<string, string>> {
     const url = `${this.url}/user/cart/${userId}`;
-    return this.http.get<{[key: string]: number}>(url).pipe(
+    return this.http.get<{[key: string]: string}>(url).pipe(
       map(response => {
-        const cart = new Map<string, number>();
+        const cart = new Map<string, string>();
         for (const key in response) {
           cart.set(key, response[key]);
         }
         return cart;
       }),
-      catchError(this.handleError<Map<string, number>>(null))
+      catchError(this.handleError<Map<string, string>>(null))
     );
   }
 
