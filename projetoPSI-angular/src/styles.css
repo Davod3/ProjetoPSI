@@ -60,6 +60,15 @@ h1 {
   .back button:hover, .save button:hover {
     background-color: #b4952f;
   }
+
+  .addToCart button {
+    background-color: #d4af37;
+    color: black;
+  }
+  
+  .addToCart button:hover {
+    background-color: #b4952f;
+  }
   
   @media only screen and (max-width: 700px) {
     .title{

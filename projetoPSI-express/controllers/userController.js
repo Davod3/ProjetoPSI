@@ -127,7 +127,56 @@ exports.user_following = (req, res, next) =>{
 
 };
 
+exports.addItemToCart = (req, res, next) =>{
+
+  let itemid = req.body.itemid;
+  let userid = req.body.userid;
+
+  if(userid) {
+
+    User.findById(userid).then(
+      
+      function(user) {
+
+        //The find by id is just to check if the item is actually on the db
+        Item.findById(itemid).then(
+
+          function(item) {
+
+            //Add item to user cart
+
+            if(user.cart.has(itemid)){
+
+              //User already has item, increase counter
+              let nItems = parseInt(user.cart.get(itemid)) + 1;
+              user.cart.set(itemid, nItems); 
+
+            } else {
+
+              user.cart.set(itemid, "1");
+
+            }
+
+            user.save();
+            res.send(true);
+
+          }
+
+        ).catch(err => handleError(err, res));
+
+      }).catch(err => handleError(err, res));
+
+    } else {
+
+      res.send(false);
+
+    };
+
+  } 
+
 function handleError(err, res) {
+
+  console.log(err);
 
   res.status(404);
   res.send(err.message);

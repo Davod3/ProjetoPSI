@@ -80,6 +80,15 @@ export class UserService {
     );
   }
 
+  addItemToCart(itemid: string, userid: string): Observable<any> {
+    return this.http.put(`${this.url}/user/cart/add`, {"itemid" : `${itemid}`, "userid" : `${userid}`}, this.httpOptions).pipe(
+      tap((response) => {
+        return response;
+      }), catchError(this.handleError<any>('addItemToCart', false))
+    );
+
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
