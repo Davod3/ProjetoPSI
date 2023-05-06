@@ -93,7 +93,17 @@ a {
   }
 
   @media only screen and (max-height: 550px) {
-
+    .save{
+        height: 30px;
+        margin-top: 10%;
+    }
+    .photos .photo div img{
+        width: 6rem;
+    }
+    .photos  {
+        margin-top: 10%;
+        margin-left: 10%;
+    }
     .user-image{
         padding-left: 33%;
     }
@@ -106,9 +116,34 @@ a {
         font-size: 100%;
     }
   }
+  @media only screen and (max-width: 900px) {
+    .photos .photo div img{
+        width: 6rem;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .photos .photo div img{
+        width: 4rem;
+    }
+  }
 
   @media only screen and (max-width: 600px) {
     
+    .photos{
+        align-self: center;
+        margin-left: 10%;
+        margin-top: 5%;
+    }
+
+    .save{
+        align-self: center;
+        margin-left: 6%;
+    }
+    .back{
+        align-self: center;
+        margin-right: 5%;
+    }
     .username img{
         max-width: 20px;
     }
