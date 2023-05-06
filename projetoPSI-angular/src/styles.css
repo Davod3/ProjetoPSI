@@ -52,12 +52,12 @@ h1 {
     cursor: auto;
   }
 
-  .back button {
+  .back button, .save button {
     background-color: #d4af37;
     color: black;
   }
   
-  .back button:hover {
+  .back button:hover, .save button:hover {
     background-color: #b4952f;
   }
 

@@ -6,9 +6,26 @@ const Item = require('../models/item');
 exports.user_profile = (req, res, next) =>{
     User.find({_id: req.params.id})
     .then(function(user){
+      if (!user || user.length == 0) {
+        return res.status(404).send('User not found');
+      }
       res.json(user);
     });
  }
+
+ exports.user_by_name = (req, res, next) =>{
+  User.find({username: req.params.username})
+  .then(function(user){
+    res.json(user);
+  });
+}
+
+exports.update_profile = (req, res, next) =>{
+  User.findOneAndUpdate({_id: req.params.id}, { $set: { username: req.body.username ,image: req.body.image}})
+  .then(function(user){
+    res.json(user);
+  });
+}
 
 exports.user_lists = (req, res, next) =>{
   User.findById(req.params.id).then(

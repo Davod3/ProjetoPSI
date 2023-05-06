@@ -1,10 +1,19 @@
-
-<div class="content">
+<div class="error" *ngIf="error">{{error}}    <div class="back">
+    <button type="button" (click)="goBack()">Go back</button>
+</div></div>
+<div *ngIf="!error" class="content">
     <div class="user-info">
         <div class="user-image">
-            <img [src]="user.image" alt="{{user.username}} Image">
+            <img [src]="user.image" alt="user Image">
         </div>
-        <div class="username">{{user.username}}</div>
+        <div class="username">
+            <div>{{user.username}}</div>
+            <ng-container *ngIf="isLogged == true">
+                <a tabindex="0" (click)="edit()" (keydown.enter)="edit()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/61/61456.png">
+                </a>
+            </ng-container>
+        </div>
     </div>
     <div class="user-links">
         <a tabindex="0" (click)="biblioteca()" (keydown.enter)="biblioteca()">

@@ -1,3 +1,6 @@
+.error{
+    text-align: center;
+}
 .content {
     padding: 20px;
     background-color: #f2f2f2;
@@ -31,7 +34,6 @@ img{
     font-weight: bold;
     align-items: center;
     justify-content: center;
-    margin-left: 10%;
 }
 
 .username a{
@@ -43,14 +45,22 @@ img{
     height: 100%;
 }
 
-.user-links{
+.photos{
     grid-area: 1 / 2 / 5 / 6; 
     display: flex;
-    flex-direction: column;
-    flex:5;
-    gap:10%;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.photo{
+    width: 30%;
+}
+
+.photo :hover{
+cursor: pointer;
 }
 
 a { 
@@ -58,23 +68,8 @@ a {
     color: inherit;
 }
 
-.user-links > *{
-    font-size: 3rem;
-    border: 3px solid #d4af37;
-    transition: color 0.2s linear;
-    transition: background-color 0.2s linear;
-    width: 90%;
-    text-align: center;
-}
-
 .username a:hover{
     cursor: pointer;
-}
-
-.user-links > *:hover{
-    cursor: pointer;
-    background-color: #b4952f;
-    color: white;
 }
 
 .back{
@@ -98,13 +93,17 @@ a {
   }
 
   @media only screen and (max-height: 550px) {
-
-    .user-links >*{
-        gap:5%;
-        max-height: 10%;
-        font-size: 100%;
+    .save{
+        height: 30px;
+        margin-top: 10%;
     }
-
+    .photos .photo div img{
+        width: 6rem;
+    }
+    .photos  {
+        margin-top: 10%;
+        margin-left: 10%;
+    }
     .user-image{
         padding-left: 33%;
     }
@@ -117,9 +116,34 @@ a {
         font-size: 100%;
     }
   }
+  @media only screen and (max-width: 900px) {
+    .photos .photo div img{
+        width: 6rem;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .photos .photo div img{
+        width: 4rem;
+    }
+  }
 
   @media only screen and (max-width: 600px) {
     
+    .photos{
+        align-self: center;
+        margin-left: 10%;
+        margin-top: 5%;
+    }
+
+    .save{
+        align-self: center;
+        margin-left: 6%;
+    }
+    .back{
+        align-self: center;
+        margin-right: 5%;
+    }
     .username img{
         max-width: 20px;
     }
@@ -136,12 +160,6 @@ a {
         margin: auto;
     }
 
-    .user-links > *{
-        font-size: 2rem;
-    }
-    .user-links{
-        gap:10px;
-    }
     .link{
         height:6%;
     }

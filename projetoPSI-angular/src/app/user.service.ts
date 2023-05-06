@@ -13,6 +13,8 @@ import { Item } from './item';
 
 export class UserService {
 
+  error: any;
+
   private url = 'http://localhost:3057';  // URL to web api
 
   httpOptions = {
@@ -24,8 +26,21 @@ export class UserService {
   getUser(_id: string): Observable<User> {
     const url = `${this.url}/user/${_id}`;
     return this.http.get<User[]>(url).pipe(
-      map(users => users[0]), // Return only the first element of the array
-      catchError(this.handleError<User>(null))
+      map(users => users[0]) // Return only the first element of the array
+    );
+  }
+
+  getUserByName(username: string): Observable<User> {
+    const url = `${this.url}/user/username/${username}`;
+    return this.http.get<User[]>(url).pipe(
+      map(users => users[0]) // Return only the first element of the array
+    );
+  }
+
+  updateUser(user: User): Observable<any> {
+    const url = `${this.url}/user/edit/${user._id}`;
+    return this.http.post(url, user, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateHero'))
     );
   }
 
