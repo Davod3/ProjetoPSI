@@ -34,5 +34,7 @@ router.get("/user/library/:id", user_controller.user_library);
 
 router.put("/user/cart/add", user_controller.addItemToCart);
 
+router.put('/user/following/:id', user_controller.addFollowing);
+
 module.exports = router;
 

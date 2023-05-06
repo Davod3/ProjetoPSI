@@ -174,10 +174,22 @@ exports.addItemToCart = (req, res, next) =>{
 
   } 
 
-function handleError(err, res) {
+  exports.addFollowing = (req, res, next) => {
+    const userId = req.params.id;
+    const followingUserId = req.body.followingUserId;
+    User.findById(userId)
+      .then(user => {
+        user.following.push(followingUserId);
+        return user.save();
+      })
+      .then(user => res.json(user))
+      .catch(err => next(err));
+  };
 
-  console.log(err);
+  function handleError(err, res) {
 
-  res.status(404);
-  res.send(err.message);
-}
+    console.log(err);
+
+    res.status(404);
+    res.send(err.message);
+  }
