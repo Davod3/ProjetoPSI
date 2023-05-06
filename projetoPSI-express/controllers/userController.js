@@ -54,27 +54,14 @@ exports.user_lists = (req, res, next) =>{
 
 exports.user_library = (req, res, next) =>{
   User.findById(req.params.id).then(
-
     function(user) {
-
-      let items = [];
-      
-      user.items.forEach(itemid => {
-
-        Item.findById(itemid).then(function(item) {
-
-          items.push(item);
-
-        });
-
-      });
-
-      res.json(items);
-
+      let itemIds = user.items;
+      let itemPromises = itemIds.map(itemId => Item.findById(itemId));
+      Promise.all(itemPromises).then(items => {
+        res.json(items);
+      }).catch(err => handleError(err, res));
     }
-
   ).catch(err => handleError(err, res));
-
 };
 
 exports.user_followers = (req, res, next) =>{
