@@ -93,6 +93,7 @@ export class EditProfileComponent {
   submit(form: any, username: any): void{
     this.user.username = username;
     form.resetForm(); 
+    alert("Profile updated successfully!");
     this.save();
   }
 
