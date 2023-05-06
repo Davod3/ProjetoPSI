@@ -74,12 +74,23 @@ export class EditProfileComponent {
     this.error = null;
     const username = form.value.fusername;
     if (!/^[a-zA-Z0-9]+$/.test(username)) {
-      this.error = "Username must contain only numbers and letters."
+      this.error = "Username must contain only numbers and letters.";
       return;
     } else if(username.length < 3 || username.length > 10){
-      this.error = "Username must be between 3 and 10 characters long."
+      this.error = "Username must be between 3 and 10 characters long.";
       return;
     }
+    this.userService.getUserByName(username)
+    .subscribe(user => {
+      if(user == null){
+        this.submit(form, username);
+      }else{
+        this.error = "Username taken";
+      }
+    });
+  }
+
+  submit(form: any, username: any): void{
     this.user.username = username;
     form.resetForm(); 
     this.save();

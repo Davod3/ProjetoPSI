@@ -20,6 +20,8 @@ router.get("/item/:id", item_controller.item_detail);
 
 router.get("/user/:id", user_controller.user_profile);
 
+router.get("/user/username/:username", user_controller.user_by_name);
+
 router.post("/user/edit/:id", user_controller.update_profile);
 
 router.get("/user/lists/:id", user_controller.user_lists);

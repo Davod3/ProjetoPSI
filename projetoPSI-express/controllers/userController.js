@@ -13,6 +13,13 @@ exports.user_profile = (req, res, next) =>{
     });
  }
 
+ exports.user_by_name = (req, res, next) =>{
+  User.find({username: req.params.username})
+  .then(function(user){
+    res.json(user);
+  });
+}
+
 exports.update_profile = (req, res, next) =>{
   User.findOneAndUpdate({_id: req.params.id}, { $set: { username: req.body.username ,image: req.body.image}})
   .then(function(user){

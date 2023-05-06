@@ -30,6 +30,13 @@ export class UserService {
     );
   }
 
+  getUserByName(username: string): Observable<User> {
+    const url = `${this.url}/user/username/${username}`;
+    return this.http.get<User[]>(url).pipe(
+      map(users => users[0]) // Return only the first element of the array
+    );
+  }
+
   updateUser(user: User): Observable<any> {
     const url = `${this.url}/user/edit/${user._id}`;
     return this.http.post(url, user, this.httpOptions).pipe(
