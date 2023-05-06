@@ -30,5 +30,14 @@ router.get("/user/library/:id", user_controller.user_library);
 
 router.put("/user/cart/add", user_controller.addItemToCart);
 
+router.put('/user/:userId/cart/:itemId/increment', incrementItemQuantity);
+
+router.put('/user/:userId/cart/:itemId/decrement', decrementItemQuantity);
+
+router.delete('/user/:userId/cart/:itemId', removeItemFromCart);
+
+router.delete('/user/:userId/cart', clearCart);
+
+
 module.exports = router;
 
