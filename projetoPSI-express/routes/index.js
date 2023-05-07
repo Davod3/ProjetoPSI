@@ -14,6 +14,8 @@ router.post('/login', authentication_controller.login);
 
 router.get("/items", item_controller.item_list);
 
+router.get("/users", user_controller.user_list);
+
 router.post('/register', authentication_controller.register);
 
 router.get("/item/:id", item_controller.item_detail);
@@ -32,9 +34,19 @@ router.get("/user/followers/:id", user_controller.user_followers);
 
 router.get("/user/library/:id", user_controller.user_library);
 
+router.get("/user/:userId/cart", user_controller.getUserCart);
+
 router.put("/user/cart/add", user_controller.addItemToCart);
 
-router.put('/user/following/:id', user_controller.addFollowing);
 
+router.put('/user/:userId/cart/increment', user_controller.incrementItemQuantity);
+
+router.put('/user/:userId/cart/decrement', user_controller.decrementItemQuantity);
+
+router.delete('/user/:userId/cart/:itemId', user_controller.removeItemFromCart);
+
+router.delete('/user/:userId/cart', user_controller.clearCart);
+
+router.put('/user/following/:id', user_controller.addFollowing);
 module.exports = router;
 

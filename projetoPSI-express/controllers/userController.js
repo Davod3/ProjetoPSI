@@ -3,6 +3,21 @@ const User = require('../models/user');
 const List = require('../models/list');
 const Item = require('../models/item');
 
+exports.user_list = async (req, res) => {
+  try {
+    const list_users = await User.find().sort([["name", "ascending"]]);
+    let results = [];
+    list_users.forEach(function(user) {
+      results.push(user);
+    });
+    res.send(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+
+
 exports.user_profile = (req, res, next) =>{
     User.find({_id: req.params.id})
     .then(function(user){
@@ -173,6 +188,99 @@ exports.addItemToCart = (req, res, next) =>{
     }
 
   }; 
+    }
+
+  }; 
+
+  exports.removeItemFromCart = (req, res, next) => {
+    const itemId = req.params.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            user.cart.delete(itemId);
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.clearCart = (req, res, next) => {
+    const userId = req.params.userId;
+    
+    console.log(userId);
+
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+
+          console.log("Helloooo!!!");
+
+          user.cart.clear();
+          user.save();
+          res.send(true);
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.incrementItemQuantity = (req, res, next) => {
+    const itemId = req.body.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            let nItems = parseInt(user.cart.get(itemId)) + 1;
+            user.cart.set(itemId, nItems);
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.decrementItemQuantity = (req, res, next) => {
+    const itemId = req.body.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            let nItems = parseInt(user.cart.get(itemId)) - 1;
+            if (nItems <= 0) {
+              user.cart.delete(itemId);
+            } else {
+              user.cart.set(itemId, nItems);
+            }
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
 
   exports.addFollowing = (req, res, next) => {
     const userId = req.params.id;
