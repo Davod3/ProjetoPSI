@@ -77,9 +77,8 @@ export class UserService {
   }
 
   clearCart(userId: string): Observable<any> {
-    const url = `${this.url}/user/cart/clear`;
-    const body = { userId: userId };
-    return this.http.put<User>(url, body, this.httpOptions).pipe(
+    const url = `${this.url}/user/${userId}/cart`;
+    return this.http.delete<User>(url,this.httpOptions).pipe(
       catchError(this.handleError<User>('clearCart'))
     );
   }
@@ -92,16 +91,16 @@ export class UserService {
   }
 
   incrementItemQuantity(userId: string, itemId: string): Observable<any> {
-    const url = `${this.url}/user/cart/increment`;
-    const body = { userId: userId, itemId: itemId };
+    const url = `${this.url}/user/${userId}/cart/increment`;
+    const body = {itemId: itemId};
     return this.http.put<User>(url, body, this.httpOptions).pipe(
       catchError(this.handleError<User>('incrementItemQuantity'))
     );
   }
 
   decrementItemQuantity(userId: string, itemId: string): Observable<any> {
-    const url = `${this.url}/user/cart/decrement`;
-    const body = { userId: userId, itemId: itemId };
+    const url = `${this.url}/user/${userId}/cart/decrement`;
+    const body = { itemId: itemId };
     return this.http.put<User>(url, body, this.httpOptions).pipe(
       catchError(this.handleError<User>('decrementItemQuantity'))
     );

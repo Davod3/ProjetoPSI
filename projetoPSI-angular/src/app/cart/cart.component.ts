@@ -28,7 +28,12 @@ export class CartComponent implements OnInit {
   incrementQuantity(item: Item): void {
     this.userService.incrementItemQuantity(this.userId, item._id).subscribe(result => {
       if(result) {
-        alert("Item quantity incremented.");
+        
+        let oldQuantity = this.cart.get(item);
+
+        this.cart.set(item, oldQuantity+1);
+        
+
       }
       else {
         alert("Couldn't increment quantity.");
@@ -37,14 +42,26 @@ export class CartComponent implements OnInit {
   }
 
   decrementQuantity(item: Item): void {
-    this.userService.decrementItemQuantity(this.userId, item._id).subscribe(result => {
-      if(result) {
-        alert("Item quantity decremented.");
-      }
-      else {
-        alert("Couldn't decrement quantity.");
-      }
-    });
+
+    let oldQuantity = this.cart.get(item);
+
+    if(oldQuantity > 1) {
+
+      this.userService.decrementItemQuantity(this.userId, item._id).subscribe(result => {
+        if(result) {
+        
+          this.cart.set(item, oldQuantity-1);
+  
+        }
+        else {
+          alert("Couldn't decrement quantity.");
+        }
+      });
+
+    } else {
+      alert("Couldn't decrement quantity.")
+    }
+
   }
 
   removeFromCart(item: Item): void {
@@ -63,6 +80,9 @@ export class CartComponent implements OnInit {
     this.userService.clearCart(this.userId).subscribe(result => {
       if(result) {
         alert("Cart cleared.");
+
+        this.cart.clear();
+
       }
       else {
         alert("Couldn't clear cart");

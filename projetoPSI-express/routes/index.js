@@ -32,9 +32,9 @@ router.get("/user/:userId/cart", user_controller.getUserCart);
 
 router.put("/user/cart/add", user_controller.addItemToCart);
 
-router.put('/user/:userId/cart/:itemId/increment', user_controller.incrementItemQuantity);
+router.put('/user/:userId/cart/increment', user_controller.incrementItemQuantity);
 
-router.put('/user/:userId/cart/:itemId/decrement', user_controller.decrementItemQuantity);
+router.put('/user/:userId/cart/decrement', user_controller.decrementItemQuantity);
 
 router.delete('/user/:userId/cart/:itemId', user_controller.removeItemFromCart);
 

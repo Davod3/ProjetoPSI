@@ -180,10 +180,15 @@ exports.addItemToCart = (req, res, next) =>{
 
   exports.clearCart = (req, res, next) => {
     const userId = req.params.userId;
-  
+    
+    console.log(userId);
+
     if (userId) {
       User.findById(userId)
         .then((user) => {
+
+          console.log("Helloooo!!!");
+
           user.cart.clear();
           user.save();
           res.send(true);
@@ -195,7 +200,7 @@ exports.addItemToCart = (req, res, next) =>{
   };
 
   exports.incrementItemQuantity = (req, res, next) => {
-    const itemId = req.params.itemId;
+    const itemId = req.body.itemId;
     const userId = req.params.userId;
   
     if (userId) {
@@ -217,7 +222,7 @@ exports.addItemToCart = (req, res, next) =>{
   };
 
   exports.decrementItemQuantity = (req, res, next) => {
-    const itemId = req.params.itemId;
+    const itemId = req.body.itemId;
     const userId = req.params.userId;
   
     if (userId) {
