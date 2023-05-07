@@ -92,14 +92,19 @@ export class CartComponent implements OnInit {
 
   cartTotal(): number {
     let total = 0;
-    this.cart.forEach((quantity, item) => {
+    
+    
+    let entries = this.cart.entries();
 
-      console.log("A")
+    for(let entry of entries) {
 
-      this.itemService.getItemPrice(item._id).subscribe(price => {
-        total += price * quantity;
-      });
-    });
+      let item = entry[0];
+      let amount = entry[1];
+
+      total+= item.price * amount;
+
+    }
+    
     return total;
   }
 
