@@ -188,9 +188,6 @@ exports.addItemToCart = (req, res, next) =>{
     }
 
   }; 
-    }
-
-  }; 
 
   exports.removeItemFromCart = (req, res, next) => {
     const itemId = req.params.itemId;

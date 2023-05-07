@@ -38,7 +38,6 @@ router.get("/user/:userId/cart", user_controller.getUserCart);
 
 router.put("/user/cart/add", user_controller.addItemToCart);
 
-
 router.put('/user/:userId/cart/increment', user_controller.incrementItemQuantity);
 
 router.put('/user/:userId/cart/decrement', user_controller.decrementItemQuantity);
@@ -48,5 +47,6 @@ router.delete('/user/:userId/cart/:itemId', user_controller.removeItemFromCart);
 router.delete('/user/:userId/cart', user_controller.clearCart);
 
 router.put('/user/following/:id', user_controller.addFollowing);
+
 module.exports = router;
 
