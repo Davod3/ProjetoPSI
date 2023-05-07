@@ -22,20 +22,24 @@ export class FollowingComponent implements OnInit{
     ){}
 
 
-    ngOnInit(): void {
-      console.log('Building page...');
-      this.buildPage();
-    }
+  ngOnInit(): void {
 
-    private buildPage(): void {
-      const id = String(this.route.snapshot.paramMap.get('id'));
-      console.log(`Retrieving following list for user ${id}...`);
-      this.userService.getUserFollowing(id)
-        .subscribe(following => {
-          console.log(`Retrieved following list: ${JSON.stringify(following)}`);
-          this.following = following;
+      this.buildPage();
+
+  }
+
+  private buildPage(): void {
+
+    const id = String(this.route.snapshot.paramMap.get('id'));
+
+    this.userService.getUserFollowing(id)
+      .subscribe(following => {
+
+        this.following = following;
+
         });
-    }
+
+  }
 
   goBack(): void {
     this.location.back();
