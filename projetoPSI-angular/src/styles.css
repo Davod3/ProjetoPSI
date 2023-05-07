@@ -4,6 +4,20 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 250%;
   }
+
+  .title{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    border-radius: 10px;
+    border-style: solid;
+    color: #d4af37;
+    border-color: #d4af37;
+    font-size: 250%;
+    margin-right: 30%;
+    margin-left: 30%;
+    margin-bottom: 2%;
+  }
+
   h2, h3 {
     color: #444;
     font-family: Arial, Helvetica, sans-serif;
@@ -38,12 +52,12 @@ h1 {
     cursor: auto;
   }
 
-  .back button {
+  .back button, .save button {
     background-color: #d4af37;
     color: black;
   }
   
-  .back button:hover {
+  .back button:hover, .save button:hover {
     background-color: #b4952f;
   }
 
@@ -56,6 +70,13 @@ h1 {
     background-color: #b4952f;
   }
   
+  @media only screen and (max-width: 700px) {
+    .title{
+      margin: auto;
+      margin-bottom: 1%;
+    }
+  }
+
   /* everywhere else */
   * {
     font-family: Arial, Helvetica, sans-serif;

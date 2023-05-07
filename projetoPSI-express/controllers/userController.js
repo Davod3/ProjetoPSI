@@ -3,12 +3,44 @@ const User = require('../models/user');
 const List = require('../models/list');
 const Item = require('../models/item');
 
+exports.user_list = async (req, res) => {
+  try {
+    const list_users = await User.find().sort([["name", "ascending"]]);
+    let results = [];
+    list_users.forEach(function(user) {
+      results.push(user);
+    });
+    res.send(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+
+
 exports.user_profile = (req, res, next) =>{
     User.find({_id: req.params.id})
     .then(function(user){
+      if (!user || user.length == 0) {
+        return res.status(404).send('User not found');
+      }
       res.json(user);
     });
  }
+
+ exports.user_by_name = (req, res, next) =>{
+  User.find({username: req.params.username})
+  .then(function(user){
+    res.json(user);
+  });
+}
+
+exports.update_profile = (req, res, next) =>{
+  User.findOneAndUpdate({_id: req.params.id}, { $set: { username: req.body.username ,image: req.body.image}})
+  .then(function(user){
+    res.json(user);
+  });
+}
 
 exports.user_lists = (req, res, next) =>{
   User.findById(req.params.id).then(

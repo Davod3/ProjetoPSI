@@ -8,7 +8,9 @@ import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 import { ListasComponent } from './listas/listas.component';
 import { FollowingComponent } from './following/following.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
 import { CartComponent } from './cart/cart.component';
@@ -19,8 +21,10 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'items', component: ItemsComponent },
   { path: 'item/:id', component: ItemDetailComponent },
-  { path: 'search', component: ItemSearchComponent},
+  { path: 'searchItem', component: ItemSearchComponent},
+  { path: 'searchUser', component: UserSearchComponent},
   { path: 'profile/:id', component: ProfileComponent },
+  { path: 'profile/edit/:id', component: EditProfileComponent },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegistrationComponent},
   { path: 'biblioteca/:id', component: BibliotecaComponent},
