@@ -50,6 +50,7 @@ export class CartComponent implements OnInit {
     this.userService.removeItemFromCart(this.userId, itemId).subscribe(result => {
       if(result) {
         alert("Item removed from cart.");
+        this.cart.delete(itemId);
       }
       else {
         alert("Couldn't remove item from cart.");
@@ -86,8 +87,6 @@ export class CartComponent implements OnInit {
     const json = JSON.stringify(map);
     const obj = JSON.parse(json);
     const mapNew = new Map(Object.entries(obj));
-
-    console.log(mapNew);
 
     for (const [key, value] of mapNew.entries()) {
       result.set(key, Number(value));
