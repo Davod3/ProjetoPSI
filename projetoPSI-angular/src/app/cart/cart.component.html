@@ -10,7 +10,8 @@
       <div class="cart-item">
         <div class="item-info">
           <h4>{{entry.key.name}}</h4>
-          <p>Price: {{entry.key.price}} $</p>
+          <p>Type: {{entry.key.type}}</p>
+          <p>Price: {{entry.key.price * entry.value}} $</p>
           <p>Quantity: {{entry.value}}</p>
           <div class="quantity-controls">
             <button (click)="decrementQuantity(entry.key)">-</button>
