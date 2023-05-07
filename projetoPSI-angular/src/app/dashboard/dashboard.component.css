@@ -54,4 +54,16 @@ li:hover {
     color: #fff;
 }
 
+.search {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 
+.search-item, .search-user {
+    width: 20%;
+    height: 200px;
+    display: inline-block;
+    vertical-align: top;
+}
