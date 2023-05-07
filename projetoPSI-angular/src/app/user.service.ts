@@ -85,9 +85,8 @@ export class UserService {
   }
 
   removeItemFromCart(userId: string, itemId: string): Observable<any> {
-    const url = `${this.url}/user/cart/remove`;
-    const body = { userId: userId, itemId: itemId };
-    return this.http.put<User>(url, body, this.httpOptions).pipe(
+    const url = `${this.url}/user/${userId}/cart/${itemId}`;
+    return this.http.delete<User>(url, this.httpOptions).pipe(
       catchError(this.handleError<User>('removeItemFromCart'))
     );
   }
@@ -109,17 +108,21 @@ export class UserService {
   }
 
   getUserCart(userId: string): Observable<Map<string, string>> {
-    const url = `${this.url}/user/cart/${userId}`;
-    return this.http.get<{[key: string]: string}>(url).pipe(
-      map(response => {
-        const cart = new Map<string, string>();
-        for (const key in response) {
-          cart.set(key, response[key]);
-        }
-        return cart;
+    const url = `${this.url}/user/${userId}/cart`;
+
+    return this.http.get<Map<string,string>>(url).pipe(
+
+      tap((response: Map<string, string>) => {
+
+        //return new Map<string, string>(Object.entries(response));
+
+        return response;
+
       }),
-      catchError(this.handleError<Map<string, string>>(null))
+      catchError(this.handleError<Map<string,string>>('getUserCart', null))
+
     );
+    
   }
 
   getItemPrice(itemId: string): Observable<number> {

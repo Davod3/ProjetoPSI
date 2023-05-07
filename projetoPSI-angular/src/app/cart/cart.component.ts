@@ -9,6 +9,7 @@ import { ItemService } from '../item.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  
   cart: Map<string, number> = new Map<string, number>();
   userId: string;
 
@@ -70,6 +71,9 @@ export class CartComponent implements OnInit {
   cartTotal(): number {
     let total = 0;
     this.cart.forEach((quantity, itemId) => {
+
+      console.log("A")
+
       this.itemService.getItemPrice(itemId).subscribe(price => {
         total += price * quantity;
       });
@@ -79,7 +83,13 @@ export class CartComponent implements OnInit {
 
   convertMapValuesToNumber(map: Map<string, string>): Map<string, number> {
     const result = new Map<string, number>();
-    for (const [key, value] of map.entries()) {
+    const json = JSON.stringify(map);
+    const obj = JSON.parse(json);
+    const mapNew = new Map(Object.entries(obj));
+
+    console.log(mapNew);
+
+    for (const [key, value] of mapNew.entries()) {
       result.set(key, Number(value));
     }
     return result;

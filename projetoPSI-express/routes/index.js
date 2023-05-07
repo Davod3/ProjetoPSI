@@ -28,15 +28,17 @@ router.get("/user/followers/:id", user_controller.user_followers);
 
 router.get("/user/library/:id", user_controller.user_library);
 
+router.get("/user/:userId/cart", user_controller.getUserCart);
+
 router.put("/user/cart/add", user_controller.addItemToCart);
 
-router.put('/user/:userId/cart/:itemId/increment', incrementItemQuantity);
+router.put('/user/:userId/cart/:itemId/increment', user_controller.incrementItemQuantity);
 
-router.put('/user/:userId/cart/:itemId/decrement', decrementItemQuantity);
+router.put('/user/:userId/cart/:itemId/decrement', user_controller.decrementItemQuantity);
 
-router.delete('/user/:userId/cart/:itemId', removeItemFromCart);
+router.delete('/user/:userId/cart/:itemId', user_controller.removeItemFromCart);
 
-router.delete('/user/:userId/cart', clearCart);
+router.delete('/user/:userId/cart', user_controller.clearCart);
 
 
 module.exports = router;

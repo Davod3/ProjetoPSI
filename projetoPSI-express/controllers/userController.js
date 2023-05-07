@@ -242,6 +242,24 @@ exports.addItemToCart = (req, res, next) =>{
     }
   };
 
+exports.getUserCart = (req, res, next) => {
+
+  const userId = req.params.userId;
+
+  if(userId) {
+
+    User.findById(userId).then((user) => {
+
+      res.json(user.cart);
+
+    }).catch((err) => handleError(err, res));
+
+  } else {
+    res.send(false);
+  }
+
+}
+
 function handleError(err, res) {
 
   console.log(err);
