@@ -6,19 +6,19 @@
 
 <div *ngIf="cart.size > 0">
   <ul class="cart-items">
-    <li *ngFor="let item of cart | keyvalue">
+    <li *ngFor="let entry of cart | keyvalue">
       <div class="cart-item">
         <div class="item-info">
-          <h4>{{item.key}}</h4>
-          <p>Price:</p>
-          <p>Quantity: {{item.value}}</p>
+          <h4>{{entry.key.name}}</h4>
+          <p>Price: {{entry.key.price}} $</p>
+          <p>Quantity: {{entry.value}}</p>
           <div class="quantity-controls">
-            <button (click)="decrementQuantity(item.key)">-</button>
-            <button (click)="incrementQuantity(item.key)">+</button>
+            <button (click)="decrementQuantity(entry.key)">-</button>
+            <button (click)="incrementQuantity(entry.key)">+</button>
           </div>
         </div>
         <div class="item-actions">
-          <button (click)="removeFromCart(item.key)">Remove</button>
+          <button (click)="removeFromCart(entry.key)">Remove</button>
         </div>
       </div>
     </li>

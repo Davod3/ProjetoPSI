@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AuthenticationService } from '../authentication.service';
 import { ItemService } from '../item.service';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,7 @@ import { ItemService } from '../item.service';
 })
 export class CartComponent implements OnInit {
   
-  cart: Map<string, number> = new Map<string, number>();
+  cart: Map<Item, number> = new Map<Item, number>();
   userId: string;
 
   constructor(private userService: UserService,
@@ -24,8 +25,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  incrementQuantity(itemId: string): void {
-    this.userService.incrementItemQuantity(this.userId, itemId).subscribe(result => {
+  incrementQuantity(item: Item): void {
+    this.userService.incrementItemQuantity(this.userId, item._id).subscribe(result => {
       if(result) {
         alert("Item quantity incremented.");
       }
@@ -35,8 +36,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  decrementQuantity(itemId: string): void {
-    this.userService.decrementItemQuantity(this.userId, itemId).subscribe(result => {
+  decrementQuantity(item: Item): void {
+    this.userService.decrementItemQuantity(this.userId, item._id).subscribe(result => {
       if(result) {
         alert("Item quantity decremented.");
       }
@@ -46,11 +47,11 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeFromCart(itemId: string): void {
-    this.userService.removeItemFromCart(this.userId, itemId).subscribe(result => {
+  removeFromCart(item: Item): void {
+    this.userService.removeItemFromCart(this.userId, item._id).subscribe(result => {
       if(result) {
         alert("Item removed from cart.");
-        this.cart.delete(itemId);
+        this.cart.delete(item);
       }
       else {
         alert("Couldn't remove item from cart.");
@@ -71,25 +72,30 @@ export class CartComponent implements OnInit {
 
   cartTotal(): number {
     let total = 0;
-    this.cart.forEach((quantity, itemId) => {
+    this.cart.forEach((quantity, item) => {
 
       console.log("A")
 
-      this.itemService.getItemPrice(itemId).subscribe(price => {
+      this.itemService.getItemPrice(item._id).subscribe(price => {
         total += price * quantity;
       });
     });
     return total;
   }
 
-  convertMapValuesToNumber(map: Map<string, string>): Map<string, number> {
-    const result = new Map<string, number>();
+  convertMapValuesToNumber(map: Map<string, string>): Map<Item, number> {
+    const result = new Map<Item, number>();
     const json = JSON.stringify(map);
     const obj = JSON.parse(json);
     const mapNew = new Map(Object.entries(obj));
 
     for (const [key, value] of mapNew.entries()) {
-      result.set(key, Number(value));
+
+      this.itemService.getItem(key).subscribe(item => {
+
+        result.set(item, Number(value));
+      })
+
     }
     return result;
   }
