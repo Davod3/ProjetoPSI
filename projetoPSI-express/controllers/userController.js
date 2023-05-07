@@ -92,54 +92,30 @@ exports.user_library = (req, res, next) =>{
 
 };
 
-exports.user_followers = (req, res, next) =>{
-  User.findById(req.params.id).then(
-
-    function(user) {
-
-      let followers = [];
-      
-      user.followers.forEach(followerid => {
-
-        User.findById(followerid).then(function(follower) {
-
-          followers.push(follower);
-
-        });
-
+exports.user_followers = (req, res, next) => {
+  User.findById(req.params.id)
+    .then(function (user) {
+      const followerPromises = user.followers.map((followerid) =>
+        User.findById(followerid)
+      );
+      Promise.all(followerPromises).then((followers) => {
+        res.json(followers);
       });
-
-      res.json(followers);
-
-    }
-
-  ).catch(err => handleError(err, res));
-
+    })
+    .catch((err) => handleError(err, res));
 };
 
-exports.user_following = (req, res, next) =>{
-  User.findById(req.params.id).then(
-
-    function(user) {
-
-      let followingUsers = [];
-      
-      user.following.forEach(followingid => {
-
-        User.findById(followingid).then(function(following) {
-
-          followingUsers.push(following);
-
-        });
-
+exports.user_following = (req, res, next) => {
+  User.findById(req.params.id)
+    .then(function (user) {
+      let promises = user.following.map((followingid) => {
+        return User.findById(followingid);
       });
-
-      res.json(followingUsers);
-
-    }
-
-  ).catch(err => handleError(err, res));
-
+      return Promise.all(promises).then((followingUsers) => {
+        res.json(followingUsers);
+      });
+    })
+    .catch((err) => handleError(err, res));
 };
 
 exports.addItemToCart = (req, res, next) =>{

@@ -1,28 +1,17 @@
 <div>
-    <h1 class="following-title">Following</h1>
+  <h1 class="following-title">Following</h1>
 
-    <div *ngIf = "following.length > 0; then thenBlock else elseBlock "></div>
+  <ng-container *ngIf="following.length > 0; else noFollowers">
+      <ul class="followed-users-list">
+          <li *ngFor="let follow of following">{{ follow.username }}</li>
+      </ul>
+  </ng-container>
 
-    <ng-template #thenBlock>
+  <ng-template #noFollowers>
+      <h2> User does not follow anyone </h2>
+  </ng-template>
 
-        <div>
-
-            <ul class="followed-users-list">
-                <li *ngFor="let follow of following">{{ follow.username }}</li>
-            </ul>
-           
-        </div>
-
-    </ng-template>
-
-    <ng-template #elseBlock>
-
-        <h2> User does not follow anyone </h2>
-
-    </ng-template>
-
-    <div class="back">
-        <button type="button" (click)="goBack()">Go back</button>
-    </div>
-    
+  <div class="back">
+      <button type="button" (click)="goBack()">Go back</button>
+  </div>
 </div>
