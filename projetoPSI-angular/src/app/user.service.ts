@@ -128,6 +128,8 @@ export class UserService {
 
       tap((response: Map<string, string>) => {
 
+        console.log(response);
+
         //return new Map<string, string>(Object.entries(response));
 
         return response;

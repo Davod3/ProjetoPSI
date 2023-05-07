@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.authService.getUser()._id;
     this.userService.getUserCart(this.userId).subscribe((cart) => {
+      console.log(cart);
       this.cart = this.convertMapValuesToNumber(cart);
     });
   }
