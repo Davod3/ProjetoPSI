@@ -13,6 +13,7 @@ import { ItemSearchComponent } from './item-search/item-search.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'listas/:id', component: ListasComponent},
   { path: 'followers/:id', component: FollowersComponent},
   { path: 'following/:id', component: FollowingComponent},
+  { path: 'cart', component: CartComponent}
 ];
 
 @NgModule({
