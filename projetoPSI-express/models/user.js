@@ -8,7 +8,8 @@ var UserSchema = new mongoose.Schema({
     followers: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     following: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     lists: [{type: mongoose.Schema.Types.ObjectId, ref: "List"}],
-    image: {type: String, required: true}
+    image: {type: String, required: true},
+    cart: {type: Map, of: "String", default: new Map()}
 });
 
 UserSchema.methods.validatePwd = function (password) {

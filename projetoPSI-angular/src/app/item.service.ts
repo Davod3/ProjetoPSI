@@ -14,7 +14,7 @@ export class ItemService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  
+
   constructor(private http: HttpClient) { }
 
   getItem(_id: String): Observable<Item> {
@@ -26,7 +26,7 @@ export class ItemService {
       ,catchError(this.handleError<Item>(null))
     );
   }
-  
+
   getItems(): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.itemsUrl}/items`)
     .pipe(
@@ -63,6 +63,10 @@ export class ItemService {
       }),
       catchError(this.handleError<Item[]>('searchItems', []))
     );
+  }
+
+  getItemPrice(itemId: string): Observable<number> {
+    return this.getItem(itemId).pipe(map(item => item.price));
   }
 
   /**

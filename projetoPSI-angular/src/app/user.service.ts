@@ -6,6 +6,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { User } from './user';
 import { List } from './list';
 import { Item } from './item';
+import { ItemService } from './item.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private itemService: ItemService) { }
 
   getUser(_id: string): Observable<User> {
     const url = `${this.url}/user/${_id}`;
@@ -88,10 +90,66 @@ export class UserService {
     );
 
   }
+  
+  clearCart(userId: string): Observable<any> {
+    const url = `${this.url}/user/${userId}/cart`;
+    return this.http.delete<User>(url,this.httpOptions).pipe(
+      catchError(this.handleError<User>('clearCart'))
+    );
+  }
 
+  removeItemFromCart(userId: string, itemId: string): Observable<any> {
+    const url = `${this.url}/user/${userId}/cart/${itemId}`;
+    return this.http.delete<User>(url, this.httpOptions).pipe(
+      catchError(this.handleError<User>('removeItemFromCart'))
+    );
+  }
+
+  incrementItemQuantity(userId: string, itemId: string): Observable<any> {
+    const url = `${this.url}/user/${userId}/cart/increment`;
+    const body = {itemId: itemId};
+    return this.http.put<User>(url, body, this.httpOptions).pipe(
+      catchError(this.handleError<User>('incrementItemQuantity'))
+    );
+  }
+
+  decrementItemQuantity(userId: string, itemId: string): Observable<any> {
+    const url = `${this.url}/user/${userId}/cart/decrement`;
+    const body = { itemId: itemId };
+    return this.http.put<User>(url, body, this.httpOptions).pipe(
+      catchError(this.handleError<User>('decrementItemQuantity'))
+    );
+  }
+
+  getUserCart(userId: string): Observable<Map<string, string>> {
+    const url = `${this.url}/user/${userId}/cart`;
+
+    return this.http.get<Map<string,string>>(url).pipe(
+
+      tap((response: Map<string, string>) => {
+
+        console.log(response);
+
+        //return new Map<string, string>(Object.entries(response));
+
+        return response;
+
+      }),
+      catchError(this.handleError<Map<string,string>>('getUserCart', null))
+
+    );
+    
+  }
+
+  getItemPrice(itemId: string): Observable<number> {
+    return this.itemService.getItem(itemId).pipe(
+      map(item => item.price),
+      catchError(this.handleError<number>(null))
+    );
+  }
+  
   searchUsers(searchTerm: string): Observable<User[]> {
     const url = `${this.url}/users`;
-    console.log(url);
     return this.http.get<User[]>(url).pipe(
       map(users => {
         // filter users whose name partially matches the search term
@@ -104,8 +162,8 @@ export class UserService {
           console.log(`${filteredUsers.length} results found for "${searchTerm}"`);
         }
       }),
-      catchError(this.handleError<User[]>('searchUsers', []))
-    );
+      catchError(this.handleError<User[]>('searchUsers', [])) 
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
