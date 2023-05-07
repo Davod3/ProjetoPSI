@@ -4,7 +4,9 @@
     <div *ngIf = "items.length > 0; then thenBlock else elseBlock "></div>
 
     <ng-template #thenBlock>
-
+        <div class="sort">
+            <button type="button" (click)="toggleSortOrder()">Sort: {{ ascendingOrder ? 'Ascending' : 'Descending' }}</button>
+        </div>
         <div>
             <ul class="library">
                 <li *ngFor="let item of items">{{ item.name }}</li>

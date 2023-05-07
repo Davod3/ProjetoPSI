@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class BibliotecaComponent implements OnInit {
 
   items: Item[] = [];
+  ascendingOrder = true;
 
   constructor(
 
@@ -24,6 +25,7 @@ export class BibliotecaComponent implements OnInit {
   ngOnInit(): void {
     
       this.buildPage();
+      this.sortItems();
 
   }
 
@@ -38,6 +40,29 @@ export class BibliotecaComponent implements OnInit {
   
         });
       
+    }
+
+    toggleSortOrder(): void {
+
+      this.ascendingOrder = !this.ascendingOrder;
+      this.sortItems();
+
+    }
+
+    sortItems(): void {
+
+      this.items.sort((a, b) => {
+
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+        if (this.ascendingOrder) {
+          return nameA.localeCompare(nameB);
+        } else {
+          return nameB.localeCompare(nameA);
+        }
+        
+      });
+
     }
 
     goBack(): void {
