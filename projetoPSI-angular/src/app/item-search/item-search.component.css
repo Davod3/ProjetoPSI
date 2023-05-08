@@ -52,11 +52,10 @@ p {
 }
 
 p.no-results {
-    display: none;
-    color: red;
+  color: red;
 }
-  
+
 p.no-results.active {
-    display: block;
+  display: block;
 }
 

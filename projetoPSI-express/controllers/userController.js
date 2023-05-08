@@ -3,12 +3,44 @@ const User = require('../models/user');
 const List = require('../models/list');
 const Item = require('../models/item');
 
+exports.user_list = async (req, res) => {
+  try {
+    const list_users = await User.find().sort([["name", "ascending"]]);
+    let results = [];
+    list_users.forEach(function(user) {
+      results.push(user);
+    });
+    res.send(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+
+
 exports.user_profile = (req, res, next) =>{
     User.find({_id: req.params.id})
     .then(function(user){
+      if (!user || user.length == 0) {
+        return res.status(404).send('User not found');
+      }
       res.json(user);
     });
  }
+
+ exports.user_by_name = (req, res, next) =>{
+  User.find({username: req.params.username})
+  .then(function(user){
+    res.json(user);
+  });
+}
+
+exports.update_profile = (req, res, next) =>{
+  User.findOneAndUpdate({_id: req.params.id}, { $set: { username: req.body.username ,image: req.body.image}})
+  .then(function(user){
+    res.json(user);
+  });
+}
 
 exports.user_lists = (req, res, next) =>{
   User.findById(req.params.id).then(
@@ -60,54 +92,30 @@ exports.user_library = (req, res, next) =>{
 
 };
 
-exports.user_followers = (req, res, next) =>{
-  User.findById(req.params.id).then(
-
-    function(user) {
-
-      let followers = [];
-      
-      user.followers.forEach(followerid => {
-
-        User.findById(followerid).then(function(follower) {
-
-          followers.push(follower);
-
-        });
-
+exports.user_followers = (req, res, next) => {
+  User.findById(req.params.id)
+    .then(function (user) {
+      const followerPromises = user.followers.map((followerid) =>
+        User.findById(followerid)
+      );
+      Promise.all(followerPromises).then((followers) => {
+        res.json(followers);
       });
-
-      res.json(followers);
-
-    }
-
-  ).catch(err => handleError(err, res));
-
+    })
+    .catch((err) => handleError(err, res));
 };
 
-exports.user_following = (req, res, next) =>{
-  User.findById(req.params.id).then(
-
-    function(user) {
-
-      let followingUsers = [];
-      
-      user.following.forEach(followingid => {
-
-        User.findById(followingid).then(function(following) {
-
-          followingUsers.push(following);
-
-        });
-
+exports.user_following = (req, res, next) => {
+  User.findById(req.params.id)
+    .then(function (user) {
+      let promises = user.following.map((followingid) => {
+        return User.findById(followingid);
       });
-
-      res.json(followingUsers);
-
-    }
-
-  ).catch(err => handleError(err, res));
-
+      return Promise.all(promises).then((followingUsers) => {
+        res.json(followingUsers);
+      });
+    })
+    .catch((err) => handleError(err, res));
 };
 
 exports.addItemToCart = (req, res, next) =>{
@@ -153,14 +161,156 @@ exports.addItemToCart = (req, res, next) =>{
 
       res.send(false);
 
-    };
+    }
 
-  } 
+  }; 
 
-function handleError(err, res) {
+  exports.removeItemFromCart = (req, res, next) => {
+    const itemId = req.params.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            user.cart.delete(itemId);
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
 
-  console.log(err);
+  exports.clearCart = (req, res, next) => {
+    const userId = req.params.userId;
+    
+    console.log(userId);
 
-  res.status(404);
-  res.send(err.message);
-}
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+
+          console.log("Helloooo!!!");
+
+          user.cart.clear();
+          user.save();
+          res.send(true);
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.incrementItemQuantity = (req, res, next) => {
+    const itemId = req.body.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            let nItems = parseInt(user.cart.get(itemId)) + 1;
+            user.cart.set(itemId, nItems);
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.decrementItemQuantity = (req, res, next) => {
+    const itemId = req.body.itemId;
+    const userId = req.params.userId;
+  
+    if (userId) {
+      User.findById(userId)
+        .then((user) => {
+          if (user.cart.has(itemId)) {
+            let nItems = parseInt(user.cart.get(itemId)) - 1;
+            if (nItems <= 0) {
+              user.cart.delete(itemId);
+            } else {
+              user.cart.set(itemId, nItems);
+            }
+            user.save();
+            res.send(true);
+          } else {
+            res.send(false);
+          }
+        })
+        .catch((err) => handleError(err, res));
+    } else {
+      res.send(false);
+    }
+  };
+
+  exports.addFollowing = (req, res, next) => {
+    const userId = req.params.id;
+    const followingUserId = req.body.followingUserId;
+  
+    User.findById(userId)
+      .then(user => {
+        if (!user) {
+          throw new Error('User not found');
+        }
+  
+        User.findById(followingUserId)
+          .then(followingUser => {
+            if (!followingUser) {
+              throw new Error('Followed user not found');
+            }
+  
+            user.following.push(followingUserId);
+            followingUser.followers.push(userId);
+  
+            user.save()
+              .then(() => {
+                followingUser.save()
+                  .then(() => {
+                    res.json(user);
+                  })
+                  .catch(err => next(err));
+              })
+              .catch(err => next(err));
+          })
+          .catch(err => next(err));
+      })
+      .catch(err => next(err));
+  };
+
+  exports.getUserCart = (req, res, next) => {
+
+    const userId = req.params.userId;
+  
+    if(userId) {
+  
+      User.findById(userId).then((user) => {
+  
+        res.json(user.cart);
+  
+      }).catch((err) => handleError(err, res));
+  
+    } else {
+      res.send(false);
+    }
+  
+  }
+
+  function handleError(err, res) {
+
+    console.log(err);
+
+    res.status(404);
+    res.send(err.message);
+  }

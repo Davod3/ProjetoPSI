@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { AuthenticationService } from '../authentication.service';
 
 
 @Component({
@@ -13,12 +14,15 @@ import { UserService } from '../user.service';
 export class ProfileComponent {
 
   user: User;
+  isLogged: boolean;
+  error: any;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
   ){}
 
   ngOnInit(): void {
@@ -29,9 +33,24 @@ export class ProfileComponent {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.userService.getUser(id)
       .subscribe(user => {
-        this.user = user
+        this.user = user;
+        this.isLogged = this.authService.getUser()._id == this.user._id;
+      },
+      error => {
+        this.error = 'User not found';
+        console.log(this.error);
       });
-    
+  }
+
+  save(): void {
+    if (this.user) {
+      this.userService.updateUser(this.user)
+        .subscribe(() => this.goBack());
+    }
+  }
+
+  edit(): void{
+    this.router.navigate([`/profile/edit/${this.user._id}`]);
   }
 
   biblioteca(): void {

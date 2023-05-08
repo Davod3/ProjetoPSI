@@ -16,8 +16,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
     LoginComponent,
     FollowersComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    EditProfileComponent,
+    UserSearchComponent
   ],
   imports: [
     BrowserModule,
