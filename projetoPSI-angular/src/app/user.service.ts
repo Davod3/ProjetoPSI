@@ -172,6 +172,14 @@ export class UserService {
       );
   }
 
+  checkout(userid: string): Observable<any> {
+    return this.http.put(`${this.url}/user/checkout/${userid}`, this.httpOptions).pipe(
+      tap((response) => {
+        return response;
+      }), catchError(this.handleError<any>('checkout', false))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

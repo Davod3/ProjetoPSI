@@ -1,0 +1,62 @@
+#checkout-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: transform 0.2s ease-out, font-size 0.2s ease-out, color 0.2s ease-out;
+}
+
+input[type="text"]:not(:placeholder-shown) + .label,
+input[type="text"]:focus + .label,
+input[type="text"]:not(:placeholder-shown)::placeholder + .label
+{
+    color: #d4af37;
+    transform: translate(-5px, -20px);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.label {
+    top: 50%;
+    pointer-events: none;
+    transition: transform 0.2s ease-out, font-size 0.2s ease-out, color 0.2s ease-out;
+}
+
+  button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d4af37;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #b4952f;
+  }
+
+  #Aviso {
+    color: red;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .sub-title {
+    line-height: 40px;
+  }
