@@ -1,0 +1,46 @@
+<div id="checkout-container">
+
+    <h1 id="form-title">Checkout</h1>
+  
+    <form #checkoutForm="ngForm" (submit)="checkout()">
+      <div class="form-group">
+        <label for="nif" class="sub-title">Enter your NIF:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nif"
+          placeholder="NIF*"
+          [(ngModel)]="nif"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="address" class="sub-title">Enter your address:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="address"
+          placeholder="Address"
+        />
+      </div>
+
+      <div class="form-group">
+            <label for="payment" class="sub-title">Payment method:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" value="credit" checked>
+                <label class="form-check-label" for="credit">Debit or credit card</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" value="paypal">
+                <label class="form-check-label" for="paypal">Paypal</label>
+            </div>
+      </div>
+
+      <div *ngIf=!isValid id="Aviso">
+        Please insert a valid NIF
+      </div>
+
+      <button type="submit" class="btn">Place order</button>
+    </form>
+  </div>
+  

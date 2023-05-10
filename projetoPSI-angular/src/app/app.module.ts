@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 
 
@@ -35,8 +36,9 @@ import { UserSearchComponent } from './user-search/user-search.component';
     ItemSearchComponent,
     LoginComponent,
     FollowersComponent,
-    EditProfileComponent,
     CartComponent,
+    CheckoutComponent,
+    EditProfileComponent,
     UserSearchComponent
   ],
   imports: [

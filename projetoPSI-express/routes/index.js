@@ -48,5 +48,7 @@ router.delete('/user/:userId/cart', user_controller.clearCart);
 
 router.put('/user/following/:id', user_controller.addFollowing);
 
+router.put('/user/checkout/:id', user_controller.checkout);
+
 module.exports = router;
 

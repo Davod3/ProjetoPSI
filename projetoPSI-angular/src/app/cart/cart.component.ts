@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { AuthenticationService } from '../authentication.service';
 import { ItemService } from '../item.service';
 import { Item } from '../item';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,8 @@ export class CartComponent implements OnInit {
   cart: Map<Item, number> = new Map<Item, number>();
   userId: string;
 
-  constructor(private userService: UserService,
+  constructor(private router: Router,
+              private userService: UserService,
               private authService: AuthenticationService,
               private itemService: ItemService) { }
 
@@ -124,5 +126,9 @@ export class CartComponent implements OnInit {
 
     }
     return result;
+  }
+
+  checkout() {
+    this.router.navigate(['/checkout']);
   }
 }

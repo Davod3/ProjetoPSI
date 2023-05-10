@@ -318,3 +318,44 @@ exports.addItemToCart = (req, res, next) =>{
     res.status(404);
     res.send(err.message);
   }
+
+    exports.checkout = (req, res, next) =>{
+
+      let userId = req.params.id;
+
+      let random = Math.floor(Math.random() * 2);
+
+      console.log(random);
+
+
+      if (random === 1) {
+
+        User.findById(userId).then((user) => {
+
+          let itemsToAdd = [];
+
+          //Efetuar o checkout
+          console.log(user.cart);
+          for (let [itemId, nItems] of user.cart) {
+
+            itemsToAdd.push(itemId);
+            user.cart.delete(itemId);
+            console.log(user.wishlist);
+            user.wishlist = user.wishlist.filter(id => id != itemId);
+            console.log(user.wishlist);
+          }
+
+          itemsToAdd.forEach((itemId) => {
+              if (!user.items.has(itemId)) {
+                let date = new Date();
+                user.items.set(itemId, date.toLocaleString());
+              }
+            });
+          user.save();
+          res.send(true);
+        }).catch(err => handleError(err, res));
+
+      } else {
+        res.send(false);
+      }
+    };
