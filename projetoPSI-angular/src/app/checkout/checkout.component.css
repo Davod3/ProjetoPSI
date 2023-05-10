@@ -46,3 +46,17 @@ input[type="text"]:not(:placeholder-shown)::placeholder + .label
   button[type="submit"]:hover {
     background-color: #b4952f;
   }
+
+  #Aviso {
+    color: red;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .sub-title {
+    line-height: 40px;
+  }

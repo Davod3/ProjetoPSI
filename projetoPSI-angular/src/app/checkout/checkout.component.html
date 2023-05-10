@@ -4,7 +4,7 @@
   
     <form #checkoutForm="ngForm" (submit)="checkout()">
       <div class="form-group">
-        <label for="nif">Enter your NIF:</label>
+        <label for="nif" class="sub-title">Enter your NIF:</label>
         <input
           type="text"
           class="form-control"
@@ -12,22 +12,20 @@
           placeholder="NIF*"
           [(ngModel)]="nif"
         />
-        <span class="label">NIF</span>
       </div>
   
       <div class="form-group">
-        <label for="address">Enter your address:</label>
+        <label for="address" class="sub-title">Enter your address:</label>
         <input
           type="text"
           class="form-control"
           name="address"
           placeholder="Address"
         />
-        <span class="label">Address</span>
       </div>
 
       <div class="form-group">
-            <label for="payment">Payment method:</label>
+            <label for="payment" class="sub-title">Payment method:</label>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="paymentMethod" value="credit" checked>
                 <label class="form-check-label" for="credit">Debit or credit card</label>
@@ -38,7 +36,7 @@
             </div>
       </div>
 
-      <div *ngIf=!isValid>
+      <div *ngIf=!isValid id="Aviso">
         Please insert a valid NIF
       </div>
 
