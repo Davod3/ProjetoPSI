@@ -45,11 +45,4 @@ export class FollowingComponent implements OnInit{
     this.location.back();
   }
 
-  followUser(userId: string, followingUserId: string): void {
-    this.userService.addUsersToList(userId, followingUserId)
-      .subscribe(user => {
-        this.buildPage();
-      });
-  }
-
 }

@@ -271,8 +271,12 @@ exports.addItemToCart = (req, res, next) =>{
               throw new Error('Followed user not found');
             }
   
-            user.following.push(followingUserId);
-            followingUser.followers.push(userId);
+            if (!user.following.includes(followingUserId)) {
+              user.following.push(followingUserId);
+            }
+            if (!followingUser.followers.includes(userId)) {
+              followingUser.followers.push(userId);
+            }
   
             user.save()
               .then(() => {
