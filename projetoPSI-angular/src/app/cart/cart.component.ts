@@ -4,6 +4,7 @@ import { AuthenticationService } from '../authentication.service';
 import { ItemService } from '../item.service';
 import { Item } from '../item';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,9 @@ export class CartComponent implements OnInit {
   constructor(private router: Router,
               private userService: UserService,
               private authService: AuthenticationService,
-              private itemService: ItemService) { }
+              private itemService: ItemService,
+              private location: Location,
+              ) { }
 
   ngOnInit(): void {
     this.userId = this.authService.getUser()._id;
@@ -131,4 +134,9 @@ export class CartComponent implements OnInit {
   checkout() {
     this.router.navigate(['/checkout']);
   }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 }
