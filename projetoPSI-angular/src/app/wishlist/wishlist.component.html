@@ -1,0 +1,28 @@
+<div>
+    <h1 class="wishlist-title">Wishlist</h1>
+
+    <div *ngIf = "wishlist.length > 0; then thenBlock else elseBlock "></div>
+
+    <ng-template #thenBlock>
+
+        <div>
+
+            <ul class="wishlist">
+                <li *ngFor="let item of wishlist"><a routerLink = "/item/{{item._id}}">{{ item.name }}</a></li>
+            </ul>
+
+        </div>
+
+    </ng-template>
+
+    <ng-template #elseBlock>
+
+        <h2> User has no games on wishlist </h2>
+
+    </ng-template>
+
+    <div class="back">
+        <button type="button" (click)="goBack()">Go back</button>
+    </div>
+
+</div>

@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit{
   }
 
   wishlist(): void {
-    
+    this.router.navigate([`/wishlist/${this.user._id}`]);
   }
 
   logout(): void {
