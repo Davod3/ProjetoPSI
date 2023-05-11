@@ -47,6 +47,10 @@ export class DashboardComponent implements OnInit{
     this.router.navigate([`/profile/${this.user._id}`]);
   }
 
+  wishlist(): void {
+    
+  }
+
   logout(): void {
 
     this.authService.logout();
