@@ -76,4 +76,17 @@ export class ProfileComponent {
   goBack(): void {
     this.location.back();
   }
+
+  follow(): void {
+    const currentUserId = this.authService.getUser()._id;
+    const targetUserId = this.user._id;
+    this.userService.addUsersToList(currentUserId, targetUserId).subscribe(
+      (response) => {
+        console.log('Request successful:', response);
+      },
+      (error) => {
+        console.error('Request error:', error);
+      }
+    );
+  }
 }

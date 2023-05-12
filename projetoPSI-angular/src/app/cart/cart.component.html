@@ -1,1 +1,38 @@
-<p>cart works!</p>
+<h2>Shopping Cart</h2>
+
+<div *ngIf="cart.size === 0">
+  <p>Your cart is empty.</p>
+</div>
+
+<div *ngIf="cart.size > 0">
+  <ul class="cart-items">
+    <li *ngFor="let entry of cart | keyvalue">
+      <div class="cart-item">
+        <div class="item-info">
+          <h4>{{entry.key.name}}</h4>
+          <p>Type: {{entry.key.type}}</p>
+          <p>Price: {{entry.key.price * entry.value}} $</p>
+          <p>Quantity: {{entry.value}}</p>
+          <div class="quantity-controls">
+            <button (click)="decrementQuantity(entry.key)">-</button>
+            <button (click)="incrementQuantity(entry.key)">+</button>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button (click)="removeFromCart(entry.key)">Remove</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cart-actions">
+    <button (click)="clearCart()">Clear Cart</button>
+    <p>Total: {{cartTotal()}}</p>
+    <button (click)="checkout()">Checkout</button>
+  </div>
+
+</div>
+
+<div class="back">
+  <button type="button" (click)="goBack()">Go back</button>
+</div>

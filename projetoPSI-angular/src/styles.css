@@ -69,6 +69,32 @@ h1 {
   .addToCart button:hover {
     background-color: #b4952f;
   }
+
+  .header {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+  }
+
+  #cart-btn{
+
+    background-color: #b4952f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+
+  }
+
+  #cart-btn{
+    content: '\f07a';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 5px;
+  }
   
   @media only screen and (max-width: 700px) {
     .title{

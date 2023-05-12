@@ -5,8 +5,9 @@
             <img [src]="user.image" alt="user Image">
         </div>
         <form class="username" #myForm="ngForm">
-            <input type="text" id="fusername" name="fusername" value={{user.username}} ngModel>
+            <input type="text" id="fusername" name="fusername"  ngModel value={{user.username}}>
         </form>
+        <div>Current username: {{user.username}}</div>
         <div class="error-message">{{error}}</div>
     </div>
     <div class="photos">
@@ -46,7 +47,10 @@
         <button type="button" (click)="goBack()">Go back</button>
     </div>
     <div class="save">
-        <button type="button" (click)="onSubmit(myForm)">Save</button>
+        <button type="button" (click)="onSubmit(myForm)">Save All</button>
+    </div>
+    <div class="save">
+        <button type="button" (click)="save()">Save Image</button>
     </div>
 </div>
 

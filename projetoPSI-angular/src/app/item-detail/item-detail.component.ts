@@ -29,13 +29,23 @@ export class ItemDetailComponent {
     this.getItem();
   }
 
+  checkBuyStatus() : boolean {
+
+    let user: User = this.authService.getUser();
+
+
+    //Check if user has item in library, depends on completed library
+
+
+    return true;
+
+  }
+
   getItem(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    console.log("ID " + id);
     this.itemService.getItem(id)
       .subscribe(item => {
         this.item = item
-        console.log("item");
       });
     
   }
@@ -62,7 +72,7 @@ export class ItemDetailComponent {
   }
 
   canShow(): boolean{
-    return this.authService.isLoggedIn();
+    return this.authService.isLoggedIn() && this.checkBuyStatus();
   } 
 
   goBack(): void {

@@ -6,6 +6,7 @@
     <ul class="dashboard-links">
         <li tabindex="0" (click)="listas()" (keydown.enter)="listas()"><a>Lists</a></li>
         <li tabindex="0" (click)="biblioteca()" (keydown.enter)="biblioteca()"><a>Item library</a></li>
+        <li tabindex="0" (click)="wishlist()" (keydown.enter)="wishlist()"><a>Wishlist</a>
         <li tabindex="0" (click)="seguidores()" (keydown.enter)="seguidores()"><a>Followers</a></li>
         <li tabindex="0" (click)="following()" (keydown.enter)="following()"><a>Following</a></li>
         <li tabindex="0" (click)="profile()" (keydown.enter)="profile()"><a>Profile</a></li>
@@ -13,7 +14,14 @@
     </ul>
 
     <div class="search">
-        <p>Search for games here: </p>
-        <app-item-search></app-item-search>
-    </div>
+        <div class="search-item">
+          <p>Search for games here:</p>
+          <app-item-search></app-item-search>
+        </div>
+        <div class="search-user">
+          <p>Search for users here:</p>
+          <app-user-search></app-user-search>
+        </div>
+      </div>
+
 </div>

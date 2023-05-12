@@ -1,0 +1,13 @@
+<div>
+  <input type="text" placeholder="Search for users..." (keyup)="search($event)">
+</div>
+<div *ngIf="users$ | async as users">
+  <ul class="search-result">
+    <li *ngFor="let user of users">
+      <a routerLink = "/profile/{{user._id}}">{{ user.username }}</a>
+    </li>
+    <li>
+      <p class="no-results" *ngIf="users.length === 0">No results found.</p>
+    </li>
+  </ul>
+</div>

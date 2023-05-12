@@ -82,10 +82,10 @@ export class EditProfileComponent {
     }
     this.userService.getUserByName(username)
     .subscribe(user => {
-      if(user == null){
+      if(user == null || user.username == this.user.username){
         this.submit(form, username);
       }else{
-        this.error = "Username taken";
+          this.error = "Username taken";
       }
     });
   }
@@ -93,12 +93,12 @@ export class EditProfileComponent {
   submit(form: any, username: any): void{
     this.user.username = username;
     form.resetForm(); 
-    alert("Profile updated successfully!");
     this.save();
   }
 
   save(): void {
     if (this.user) {
+      alert("Profile updated successfully!");
       this.userService.updateUser(this.user)
         .subscribe(() => this.goBack());
     }
