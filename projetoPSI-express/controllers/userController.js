@@ -43,27 +43,17 @@ exports.update_profile = (req, res, next) =>{
 }
 
 exports.user_lists = (req, res, next) =>{
-  User.findById(req.params.id).then(
 
-    function(user) {
-
-      let lists = [];
-      
-      user.lists.forEach(listid => {
-
-        List.findById(listid).then(function(list) {
-
-          lists.push(list);
-
-        });
-
-      });
-
+  User.findById(req.params.id)
+  .then(function (user) {
+    const listPromises = user.lists.map((listid) =>
+      List.findById(listid)
+    );
+    Promise.all(listPromises).then((lists) => {
       res.json(lists);
-
-    }
-
-  ).catch(err => handleError(err, res));
+    });
+  })
+  .catch((err) => handleError(err, res));
 
 };
 
