@@ -36,6 +36,8 @@ router.get("/user/library/:id", user_controller.user_library);
 
 router.get("/user/:userId/cart", user_controller.getUserCart);
 
+router.get("/user/wishlist/:id", user_controller.user_wishlist);
+
 router.put("/user/cart/add", user_controller.addItemToCart);
 
 router.put('/user/:userId/cart/increment', user_controller.incrementItemQuantity);

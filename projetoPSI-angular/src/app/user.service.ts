@@ -73,6 +73,15 @@ export class UserService {
     );
   }
 
+  getUserWishlist(id: string): Observable<Item[]> {
+    const url = `${this.url}/user/wishlist/${id}`;
+    return this.http.get<Item[]>(url).pipe(
+      tap((response: Item[]) => {
+        return response;
+      }), catchError(this.handleError<Item[]>('getUserWishlist', []))
+    );
+  }
+
   getUserLibrary(id: string): Observable<Item[]> {
     const url = `${this.url}/user/library/${id}`;
     return this.http.get<Item[]>(url).pipe(

@@ -43,27 +43,17 @@ exports.update_profile = (req, res, next) =>{
 }
 
 exports.user_lists = (req, res, next) =>{
-  User.findById(req.params.id).then(
 
-    function(user) {
-
-      let lists = [];
-      
-      user.lists.forEach(listid => {
-
-        List.findById(listid).then(function(list) {
-
-          lists.push(list);
-
-        });
-
-      });
-
+  User.findById(req.params.id)
+  .then(function (user) {
+    const listPromises = user.lists.map((listid) =>
+      List.findById(listid)
+    );
+    Promise.all(listPromises).then((lists) => {
       res.json(lists);
-
-    }
-
-  ).catch(err => handleError(err, res));
+    });
+  })
+  .catch((err) => handleError(err, res));
 
 };
 
@@ -103,6 +93,26 @@ exports.user_followers = (req, res, next) => {
       });
     })
     .catch((err) => handleError(err, res));
+};
+
+exports.user_wishlist = (req,res,next) => {
+
+  User.findById(req.params.id).then(
+
+    function(user) {
+
+      const itemPromises = user.wishlist.map((itemid) => Item.findById(itemid));
+
+      Promise.all(itemPromises).then((items) => {
+
+        res.json(items);
+
+      });
+
+    }
+
+  ).catch((err) => handleError(err, res));
+
 };
 
 exports.user_following = (req, res, next) => {
@@ -316,7 +326,14 @@ exports.addItemToCart = (req, res, next) =>{
     console.log(err);
 
     res.status(404);
-    res.send(err.message);
+
+    if(err){
+      console.log("1");
+      res.send(err.message);
+    } else {
+      console.log("2");
+      res.send("Something went very wrong!");
+    }
   }
 
     exports.checkout = (req, res, next) =>{

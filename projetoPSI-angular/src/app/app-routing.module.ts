@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'followers/:id', component: FollowersComponent},
   { path: 'following/:id', component: FollowingComponent},
   { path: 'checkout', component: CheckoutComponent},
-  { path: 'cart', component: CartComponent}
+  { path: 'cart', component: CartComponent},
+  { path: 'wishlist/:id', component: WishlistComponent}
 ];
 
 @NgModule({

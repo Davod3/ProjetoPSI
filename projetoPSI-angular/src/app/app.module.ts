@@ -20,6 +20,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { UserSearchComponent } from './user-search/user-search.component';
     CartComponent,
     CheckoutComponent,
     EditProfileComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,
