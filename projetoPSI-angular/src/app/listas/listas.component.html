@@ -6,11 +6,9 @@
     <ng-template #thenBlock>
 
         <div>
-
-            <ul class="lists">
-                <li *ngFor="let list of lists">{{ list.name }}</li>
-            </ul>
-           
+            <ng-container class="lists" *ngFor="let list of lists">
+                <li *ngIf="canShow(list)">{{ list.name }}</li>
+            </ng-container>
         </div>
 
     </ng-template>

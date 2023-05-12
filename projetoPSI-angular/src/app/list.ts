@@ -5,4 +5,5 @@ export interface List {
     name: string;
     content: Item[];
     public: Boolean;
+    owner: string;
   }
