@@ -1,5 +1,9 @@
 <header class="header">
-    <div class="title">GAMEBOND</div>
-    <button id="cart-btn" [routerLink]="'/cart'"><i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
+  <div class="title">GAMEBOND</div>
+  <ng-container *ngIf="isUserLoggedIn()">
+      <button id="cart-btn" [routerLink]="'/cart'">
+          <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+      </button>
+  </ng-container>
 </header>
 <router-outlet></router-outlet>
