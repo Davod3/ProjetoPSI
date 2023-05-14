@@ -15,6 +15,7 @@ export class ProfileComponent {
 
   user: User;
   isLogged: boolean;
+  showFollow: boolean;
   error: any;
 
   constructor(
@@ -31,10 +32,24 @@ export class ProfileComponent {
 
   getUser(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
+    const loggedUserid = this.authService.getUser()._id; //Currently logged in user
+
+
     this.userService.getUser(id)
       .subscribe(user => {
-        this.user = user;
-        this.isLogged = this.authService.getUser()._id == this.user._id;
+        this.user = user; //User who the profile belongs to
+        this.isLogged = loggedUserid == this.user._id; //Check if profile belongs to logged user
+
+        if(!this.isLogged){
+
+          this.userService.getUser(loggedUserid).subscribe(loggedUser => {
+
+            this.showFollow = !loggedUser.following.includes(id);
+
+          });
+
+        }
+
       },
       error => {
         this.error = 'User not found';
@@ -82,6 +97,7 @@ export class ProfileComponent {
     const targetUserId = this.user._id;
     this.userService.addUsersToList(currentUserId, targetUserId).subscribe(
       (response) => {
+        this.showFollow = false;
         console.log('Request successful:', response);
       },
       (error) => {

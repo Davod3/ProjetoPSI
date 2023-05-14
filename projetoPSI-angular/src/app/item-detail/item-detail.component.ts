@@ -16,6 +16,7 @@ import { UserService } from '../user.service';
 export class ItemDetailComponent {
 
   @Input() item : Item;
+  canShow : Boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,17 +28,27 @@ export class ItemDetailComponent {
 
   ngOnInit(): void {
     this.getItem();
+    this.checkBuyStatus();
   }
 
-  checkBuyStatus() : boolean {
+  checkBuyStatus() : void {
 
     let user: User = this.authService.getUser();
 
+     
+    this.userService.getUser(user._id).subscribe(userObj => {
+      
+      const json = JSON.stringify(userObj.items);
+      const obj = JSON.parse(json);
+      const mapNew = new Map(Object.entries(obj));
 
-    //Check if user has item in library, depends on completed library
-
-
-    return true;
+      if(mapNew.has(this.item._id)){
+        this.canShow = false;
+      } else{
+        this.canShow = true && this.authService.isLoggedIn();
+      }
+    
+    });
 
   }
 
@@ -70,10 +81,6 @@ export class ItemDetailComponent {
 
 
   }
-
-  canShow(): boolean{
-    return this.authService.isLoggedIn() && this.checkBuyStatus();
-  } 
 
   goBack(): void {
     this.location.back();

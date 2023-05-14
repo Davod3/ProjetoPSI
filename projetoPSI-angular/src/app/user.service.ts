@@ -82,14 +82,31 @@ export class UserService {
     );
   }
 
-  getUserLibrary(id: string): Observable<Item[]> {
+  getUserLibrary(id: string): Observable<Map<Item, string>> {
     const url = `${this.url}/user/library/${id}`;
-    return this.http.get<Item[]>(url).pipe(
-      tap((response: Item[]) => {
-        return response;
-      }), catchError(this.handleError<Item[]>(null))
+    return this.http.get<any[]>(url).pipe(
+      switchMap((itemsWithDates: any[]) => {
+        const itemIds = itemsWithDates.map(itemData => itemData.item._id);
+        const itemObservables = itemIds.map(itemId => this.itemService.getItem(itemId));
+        return forkJoin(itemObservables).pipe(
+          map(items => {
+            const libraryMap = new Map<Item, string>();
+            itemsWithDates.forEach((itemData, index) => {
+              const item = items[index];
+              if (item) {
+                const date = itemData.date;
+                libraryMap.set(item, date);
+              }
+            });
+            console.log(libraryMap);
+            return libraryMap;
+          })
+        );
+      }),
+      catchError(this.handleError<Map<Item, string>>(null))
     );
   }
+  
 
   addItemToCart(itemid: string, userid: string): Observable<any> {
     return this.http.put(`${this.url}/user/cart/add`, {"itemid" : `${itemid}`, "userid" : `${userid}`}, this.httpOptions).pipe(
