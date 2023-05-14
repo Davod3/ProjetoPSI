@@ -13,33 +13,33 @@ export class FollowingComponent implements OnInit{
 
   following: User[] = [];
 
-  constructor( 
-    
+  constructor(
+
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
-    
+
     ){}
 
 
   ngOnInit(): void {
 
       this.buildPage();
-  
+
   }
 
   private buildPage(): void {
-    
+
     const id = String(this.route.snapshot.paramMap.get('id'));
-  
+
     this.userService.getUserFollowing(id)
       .subscribe(following => {
-          
+
         this.following = following;
-  
+
         });
-        
-  } 
+
+  }
 
   goBack(): void {
     this.location.back();

@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { List } from '../list';
 import { Location } from '@angular/common';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-listas',
@@ -17,7 +18,8 @@ export class ListasComponent implements OnInit{
 
     private userService: UserService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private authService: AuthenticationService
   
     ){}
 
@@ -39,7 +41,15 @@ export class ListasComponent implements OnInit{
   
         });
       
-  } 
+  }
+  
+  canShow(list: List): Boolean {
+
+    let user = this.authService.getUser();
+
+    return list.public || user._id === list.owner
+
+  }
 
   goBack(): void {
     this.location.back();

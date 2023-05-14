@@ -48,8 +48,7 @@ html, body{
     flex: 1;
     display: flex;
     justify-self: start;
-    gap:15%;
-
+    gap:5%;
   }
 
   .info-right{
@@ -167,15 +166,43 @@ html, body{
   }
 
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 900px) {
+    h2, .item-type{
+      text-align: center;
+      align-content: center;
+      align-items: center;
+    }
     .main-box{
       flex-direction: column;
     }
-
-    .item-image{
-      width: 100%;
+    .info-right{
+      align-self: center;
     }
 
+    .info-left{
+      align-self: center;
+      align-items: center;
+      align-content: center;
+    }
+    .item-image{
+      display: block;
+      width: 100%;
+      align-self: center;
+      align-items: center;
+      align-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    img{
+      display: block;
+      width: 100%;
+      align-self: center;
+      align-items: center;
+      align-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
     html, body{
       width: 100%;
       align-items: center;

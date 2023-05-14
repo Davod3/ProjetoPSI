@@ -1,27 +1,26 @@
 <div class="biblioteca">
     <h1 class="biblioteca-title">Item library</h1>
-
-    <div *ngIf = "items.length > 0; then thenBlock else elseBlock "></div>
-
-    <ng-template #thenBlock>
-
-        <div>
-            <ul class="library">
-                <li *ngFor="let item of items">{{ item.name }}</li>
-            </ul>
-        </div>
-
-    </ng-template>
-
-    <ng-template #elseBlock>
-
-        <h2> User does not own any items</h2>
-
-    </ng-template>
-
-    <div class="back">
-        <button type="button" (click)="goBack()">Go back</button>
+  
+    <div *ngIf="library.size > 0; else noItemsBlock">
+      <div class="sort">
+        <button type="button" (click)="toggleSortOrder()">Sort by Name: {{ ascendingOrder ? 'Ascending' : 'Descending' }}</button>
+        <button type="button" (click)="toggleDateSortOrder()">Sort by Date: {{ dateAscendingOrder ? 'Ascending' : 'Descending' }}</button>
+      </div>
+      <div>
+        <ul class="library">
+          <li *ngFor="let item of items">
+            <a routerLink = "/item/{{item[0]._id}}">{{ item[0].name }}</a> - {{ item[1] }}
+          </li>
+        </ul>
+      </div>
     </div>
-
-</div>
-
+  
+    <ng-template #noItemsBlock>
+      <h2>User does not own any items.</h2>
+    </ng-template>
+  
+    <div class="back">
+      <button type="button" (click)="goBack()">Go back</button>
+    </div>
+  </div>
+  

@@ -13,7 +13,7 @@
 }
 
 .user-info{
-    grid-area: 1 / 1 / 5 / 2; 
+    grid-area: 1 / 1 / 5 / 2;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -25,14 +25,26 @@ img{
 }
 
 .username{
+    display: flex;
     font-size: 3em;
     text-align: center;
     font-weight: bold;
-    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+}
+
+.username a{
+    min-width: 20px;
+    max-width: 30px;
+}
+.username a img{
+    width: 100%;
+    height: 100%;
 }
 
 .user-links{
-    grid-area: 1 / 2 / 5 / 6; 
+    grid-area: 1 / 2 / 5 / 6;
     display: flex;
     flex-direction: column;
     flex:5;
@@ -41,8 +53,8 @@ img{
     justify-content: center;
 }
 
-a { 
-    text-decoration: none; 
+a {
+    text-decoration: none;
     color: inherit;
 }
 
@@ -53,6 +65,10 @@ a {
     transition: background-color 0.2s linear;
     width: 90%;
     text-align: center;
+}
+
+.username a:hover{
+    cursor: pointer;
 }
 
 .user-links > *:hover{
@@ -81,7 +97,33 @@ a {
     margin-left: 25%;
   }
 
+  @media only screen and (max-height: 550px) {
+
+    .user-links >*{
+        gap:5%;
+        max-height: 10%;
+        font-size: 100%;
+    }
+
+    .user-image{
+        padding-left: 33%;
+    }
+
+    .user-image img{
+        width: 50%;
+    }
+
+    .username{
+        font-size: 100%;
+    }
+  }
+
   @media only screen and (max-width: 600px) {
+
+    .username img{
+        max-width: 20px;
+    }
+
     .content{
         display: flex;
         flex-direction: column;
@@ -91,6 +133,7 @@ a {
 
     .username{
         font-size: 2rem;
+        margin: auto;
     }
 
     .user-links > *{
@@ -102,4 +145,18 @@ a {
     .link{
         height:6%;
     }
+  }
+
+  .username button {
+    background-color: #d4af37;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+  }
+
+  .username button:hover {
+    background-color: #b4952f;
   }

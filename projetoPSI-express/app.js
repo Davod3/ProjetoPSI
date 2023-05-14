@@ -15,7 +15,7 @@ app.use(cors())
 
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
-const mongoDB = "mongodb://psi007:psi007@localhost:27017/psi007?retryWrites=true&authSource=psi007";
+const mongoDB = "mongodb+srv://psi007:steamdawish@cluster0.aa5jydx.mongodb.net/psi007?retryWrites=true&w=majority";
 
 main().catch(err => console.log(err));
 async function main() {
@@ -30,7 +30,7 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

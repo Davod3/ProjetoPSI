@@ -43,6 +43,11 @@
           </ng-container>
         </div>
       </div>
+      <div class="info-center">
+        <div class="addToCart">
+          <button *ngIf="canShow" type="button" (click)="addToCart()">Add to cart!</button>
+        </div>
+      </div>
       <div class="info-right">
         <div class="item-price">
           {{item.price}}€

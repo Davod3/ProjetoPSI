@@ -9,4 +9,10 @@ import { AuthenticationService } from './authentication.service';
 export class AppComponent {
   title = 'projetoPSI-angular';
   constructor(public auth: AuthenticationService) {}
+
+  isUserLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
 }
+
+
