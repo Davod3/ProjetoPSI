@@ -37,8 +37,7 @@ export class ItemDetailComponent {
 
      
     this.userService.getUser(user._id).subscribe(userObj => {
-
-      console.log("Teste 39");
+      
       const json = JSON.stringify(userObj.items);
       const obj = JSON.parse(json);
       const mapNew = new Map(Object.entries(obj));
