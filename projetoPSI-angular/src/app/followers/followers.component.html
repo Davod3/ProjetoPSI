@@ -8,7 +8,7 @@
         <div>
 
             <ul class="followers-list">
-                <li *ngFor="let follower of followers">{{ follower.username }}</li>
+                <li *ngFor="let follower of followers"><a routerLink = "/profile/{{follower._id}}">{{ follower.username }}</a></li>
             </ul>
            
         </div>
