@@ -16,7 +16,7 @@ export class UserService {
 
   error: any;
 
-  private url = 'http://localhost:3057';  // URL to web api
+  private url = 'http://appserver.alunos.di.fc.ul.pt:3057';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
