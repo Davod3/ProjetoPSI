@@ -3,7 +3,8 @@
   
     <div *ngIf="library.size > 0; else noItemsBlock">
       <div class="sort">
-        <button type="button" (click)="toggleSortOrder()">Sort: {{ ascendingOrder ? 'Ascending' : 'Descending' }}</button>
+        <button type="button" (click)="toggleSortOrder()">Sort by Name: {{ ascendingOrder ? 'Ascending' : 'Descending' }}</button>
+        <button type="button" (click)="toggleDateSortOrder()">Sort by Date: {{ dateAscendingOrder ? 'Ascending' : 'Descending' }}</button>
       </div>
       <div>
         <ul class="library">
@@ -15,7 +16,7 @@
     </div>
   
     <ng-template #noItemsBlock>
-      <h2>User does not own any items</h2>
+      <h2>User does not own any items.</h2>
     </ng-template>
   
     <div class="back">
