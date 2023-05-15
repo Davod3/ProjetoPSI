@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { AuthenticationService } from '../authentication.service';
 import { ItemService } from '../item.service';
 import { Item } from '../item';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
@@ -20,7 +21,8 @@ export class CheckoutComponent {
   constructor(private router: Router,
               private userService: UserService,
               private authService: AuthenticationService,
-              private itemService: ItemService
+              private itemService: ItemService,
+              private location: Location
               ) {};
 
   ngOnInit(): void {
@@ -46,4 +48,8 @@ export class CheckoutComponent {
       this.isValid = false;
     }
   };
+
+  goBack(): void {
+    this.location.back();
+  }
 }
