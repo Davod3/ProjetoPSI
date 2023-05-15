@@ -13,8 +13,8 @@ h1 {
     color: #d4af37;
     border-color: #d4af37;
     font-size: 250%;
-    margin-right: 30%;
-    margin-left: 30%;
+    align-self: center;
+    justify-self: center;
     margin-bottom: 2%;
   }
 
@@ -71,11 +71,9 @@ h1 {
   }
 
   .header {
-
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
+    align-items: center;
+    justify-content: space-around;
   }
 
   #cart-btn{
@@ -86,14 +84,9 @@ h1 {
     padding: 10px 20px;
     border-radius: 50px;
     cursor: pointer;
-
-  }
-
-  #cart-btn{
     content: '\f07a';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
-    margin-right: 5px;
   }
   
   @media only screen and (max-width: 700px) {
