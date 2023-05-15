@@ -88,6 +88,10 @@ export class ProfileComponent {
     this.router.navigate([`/profile/${this.user._id}`]);
   }
 
+  wishlist(): void {
+    this.router.navigate([`/wishlist/${this.user._id}`]);
+  }
+
   goBack(): void {
     this.location.back();
   }

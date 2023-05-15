@@ -48,7 +48,7 @@ img{
     display: flex;
     flex-direction: column;
     flex:5;
-    gap:10%;
+    gap:5%;
     align-items: center;
     justify-content: center;
 }
