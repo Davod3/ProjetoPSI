@@ -15,7 +15,7 @@ app.use(cors())
 
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
-const mongoDB = "mongodb+srv://psi007:steamdawish@cluster0.aa5jydx.mongodb.net/psi007?retryWrites=true&w=majority";
+const mongoDB = "mongobd database url";
 
 main().catch(err => console.log(err));
 async function main() {
