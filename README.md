@@ -1,3 +1,7 @@
+This project does not have a pre-defined database. For it to function you should insert an url to your own MongoDB database. To do so, change the variable mongodb in the file /projetoPSI-express/app.js
+
+We recommend the usage of the service Mongo Atlas for this purpose.
+
 # ProjetoPSIAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
